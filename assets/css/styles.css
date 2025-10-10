@@ -810,4 +810,41 @@ textarea {
     max-width: 100% !important;
   }
 }
+/* --- Mobile typography fix for blog intro section --- */
+@media (max-width: 768px) {
+
+  /* Match hero title size */
+  .section-title,
+  .guides-title,
+  h1.guides-heading {
+    font-size: 1.9rem !important;
+    line-height: 1.3 !important;
+    font-weight: 700 !important;
+    margin-top: 0.6rem !important; /* space below the blue tag */
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* Adjust subtitle paragraph under the title */
+  .section-description,
+  .guides-description,
+  .intro-text {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  /* Add spacing between badge and heading */
+  .section-tag,
+  .category-badge,
+  .badge {
+    display: inline-block;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Slightly reduce overall section padding to keep everything compact */
+  .guides-section,
+  .intro-section {
+    padding: 1.5rem 1rem !important;
+  }
+}
 
