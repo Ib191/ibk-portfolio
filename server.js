@@ -2,11 +2,27 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// Sert tout depuis la racine (où se trouve index.html)
+app.disable('x-powered-by');
+app.enable('trust proxy');
+
+app.use((req, res, next) => {
+  if (req.secure) return next();
+  return res.redirect(301, `https://${req.headers.host}${req.originalUrl}`);
+});
+
+app.use((req, res, next) => {
+  const host = req.headers.host || '';
+  if (host === 'iliasbk.me') {
+    return res.redirect(301, `https://www.iliasbk.me${req.originalUrl}`);
+  }
+  return next();
+});
+
+// serve static
 app.use(express.static(path.join(__dirname, '.')));
 app.get('/favicon.ico', (_req, res) => res.status(204).end());
 
-// Fallback: si l'URL ne correspond pas à un fichier, renvoyer index.html
+// fallback
 app.get('/*', (_req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
