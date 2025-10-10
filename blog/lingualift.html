@@ -77,65 +77,64 @@
           </section>
 
           <!-- OVERVIEW -->
-          <section class="feature-list">
-            <div class="feature">
-              <span class="feature-title">Capture from anywhere</span>
-              <p>Highlight text in Chrome and send it with one click. The page title and URL are captured for context.</p>
-            </div>
-            <div class="feature">
-              <span class="feature-title">Translate & enrich</span>
-              <p>Make calls an LLM/translation step, adds phonetics (if needed), and suggests tags based on topic.</p>
-            </div>
-            <div class="feature">
-              <span class="feature-title">Review without friction</span>
-              <p>Entries land in a simple table (Notion/Sheets/Airtable—pick your store) with filters for quick sessions.</p>
-            </div>
-          </section>
+        <section style="display: grid; gap: 1rem;">
+          <h2>The problem</h2>
+          <p class="text-small">
+            When you’re reading online in another language, you often come across new words or expressions that catch your attention.  
+            You look them up, maybe translate them — but then you forget them minutes later.  
+            Existing apps make it tedious: switching tabs, logging in, copying, pasting, organizing... the moment’s gone.
+          </p>
+        </section>
+          <section style="display: grid; gap: 1rem; margin-top: -2rem;">
+          <h2>The solution</h2>
+          <p class="text-small">
+            <strong>LinguaLift</strong> makes language learning part of your normal browsing.  
+            Highlight a phrase, right-click, and send it to your personal learning space.  
+            It’s instantly translated, tagged, and stored — ready for later review.  
+            No distractions, no friction, just natural learning flow.
+          </p>
+        </section>
+        <hr style="border: 0; height: 1px; background: #1e293b; margin: 2rem 0;" />
 
-          <!-- HOW IT WORKS -->
-          <section style="display: grid; gap: 1rem;">
-            <h2>How it works</h2>
-            <ol class="text-small" style="display: grid; gap: 0.5rem; padding-left: 1rem;">
-              <li><strong>Chrome helper</strong>: a minimal extension adds a context-menu entry “Send to LinguaLift”. It packages selection, source URL, and language.</li>
-              <li><strong>Make webhook</strong>: receives the payload, translates the selection, and proposes tags (domain + tone).</li>
-              <li><strong>Storage</strong>: the record is saved to your store (I use Notion DB; Google Sheets works too).</li>
-              <li><strong>Drill</strong>: a review view shows “new / due / starred”. Optional spaced-repetition field increments on each pass.</li>
-            </ol>
-          </section>
+        <section style="display: grid; gap: 1rem;">
+          <h2>How it works</h2>
+          <ol class="text-small" style="display: grid; gap: 1rem; padding-left: 1rem;">
+            <li>
+              <strong>1️⃣ Capture on the fly</strong> — Right-click any phrase in Chrome and select <em>“Send to LinguaLift.”</em><br />
+              The extension instantly captures the highlighted text, its source URL, and the detected language.
+            </li>
 
-          <!-- SETUP -->
-          <section class="contact-card">
-            <h2>Set it up in 10 minutes</h2>
-            <p>
-              Use the files below, change the webhook URL in the extension, and pick your data store. The flow is provider-agnostic.
-            </p>
-            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-              <a class="btn btn-primary" href="../assets/lingualift/extension.zip" download>Download Chrome helper</a>
-              <a class="btn" href="../assets/lingualift/make-blueprint.json" download>Make scenario (JSON)</a>
-              <a class="btn" href="../assets/lingualift/notion-template.txt" download>Notion DB fields</a>
-            </div>
-          </section>
+            <li>
+              <strong>🗄️ Store securely in Supabase</strong> — Each capture is logged in a lightweight Supabase table,<br />
+              keeping your phrases organized, queryable, and ready for automation.
+            </li>
 
-          <!-- CONFIG -->
-          <section style="display: grid; gap: 1rem;">
-            <h2>Minimal configuration</h2>
-            <p class="text-small">In <code>extension/background.js</code>, set your Make webhook:</p>
-<pre class="code-block"><code>const WEBHOOK_URL = "https://hook.eu1.make.com/your-webhook-id";
-chrome.runtime.onMessage.addListener((payload) =&gt; {
-  fetch(WEBHOOK_URL, { method: "POST", body: JSON.stringify(payload) });
-});</code></pre>
-            <p class="text-small">In Make, map fields like <code>text</code>, <code>source_url</code>, <code>lang_from</code>, <code>lang_to</code>, then add:</p>
-            <ul class="text-small" style="display: grid; gap: 0.25rem; padding-left: 1rem;">
-              <li>Translate (provider of your choice)</li>
-              <li>Generate tags (LLM) — limit to 2–3 concise tags</li>
-              <li>Write row to Notion/Sheets/Airtable</li>
+            <li>
+              <strong>⚙️ Process via Make</strong> — Make listens for new entries from Supabase, translates them using your preferred provider,<br />
+              adds phonetics (optional), and generates a few smart tags such as topic, tone, or context.
+            </li>
+
+            <li>
+              <strong>📚 Review & retain</strong> — Your phrases appear in Notion, Sheets, or Airtable for review.<br />
+              Filter by topic or difficulty, star your favorites, and track your spaced repetition progress over time.
+            </li>
+          </ol>
+        </section>
+
+
+          <hr style="border: 0; height: 1px; background: #1f2937; margin: 2rem 0;" />
+          <!-- TECH STACK -->
+          <section>
+            <h2>Tech Stack</h2>
+            <ul class="text-small">
+              <li><strong>Chrome Extension</strong>: Built with JavaScript, HTML, and CSS.</li>
+              <li><strong>Make</strong>: No-code automation platform for connecting apps.</li>
+              <li><strong>Supabase</strong>: For storing and retrieving user data.</li>
+              <li><strong>OpenAI API</strong>: For language processing and translation.</li>
             </ul>
           </section>
 
           <!-- NOTES -->
-          <section class="alert">
-            <strong>Privacy note:</strong> keep sensitive content out of the capture flow. For public pages, the URL is stored for context; disable this if you prefer local-only logs.
-          </section>
 
           <!-- CTA -->
           <footer class="alert">
