@@ -4,6 +4,7 @@ const app = express();
 
 // Sert tout depuis la racine (où se trouve index.html)
 app.use(express.static(path.join(__dirname, '.')));
+app.get('/favicon.ico', (_req, res) => res.status(204).end());
 
 // Fallback: si l'URL ne correspond pas à un fichier, renvoyer index.html
 app.get('*', (_req, res) => {
