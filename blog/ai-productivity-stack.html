@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Building a Personal Productivity Stack with Generative AI ? IBK Blogs</title>
+    <meta name="description" content="See how Ilias Benkhaled combines AI note-taking, planning, and automation tools to reclaim hours every week." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <script defer src="../assets/js/main.js"></script>
+  </head>
+  <body data-page="blog" data-assets-root="..">
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="../index.html">IBK <span>Blogs.</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation">?</button>
+        <div class="nav-links">
+          <a data-nav="home" href="../index.html">Home</a>
+          <a data-nav="blog" href="../blog.html">Blog</a>
+          <a data-nav="about" href="../about.html">About Me</a>
+          <a data-nav="contact" href="../contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <article class="section">
+        <div class="container" style="display: grid; gap: 3rem;">
+          <header style="display: grid; gap: 1rem;">
+            <span class="badge">Productivity ? No-Code</span>
+            <h1>Building a Personal Productivity Stack with Generative AI</h1>
+            <div class="post-meta">
+              <span>Published August 2, 2025</span>
+              <span>8 min read</span>
+            </div>
+            <p class="text-small">
+              My system funnels inputs from meetings, research, and ideas into a trusted workflow.
+              AI keeps everything summarized, actionable, and searchable.
+            </p>
+          </header>
+
+          <section class="feature-list">
+            <div class="feature">
+              <span class="feature-title">Capture ? Notion AI</span>
+              <p>Meeting notes land in Notion and are auto-tagged with follow-up prompts.</p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">Plan ? Motion & GPT-4o</span>
+              <p>Calendar blocks are generated from a daily stand-up prompt I run each morning.</p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">Execute ? Zapier + Make</span>
+              <p>Finished tasks trigger recaps that update teammates on Slack automatically.</p>
+            </div>
+          </section>
+
+          <section class="contact-card">
+            <h2>Download the stack</h2>
+            <p>
+              I packaged the templates, prompts, and automations in one toolkit. Duplicate the
+              Notion workspace, connect your APIs, and customize the prompts in under 30 minutes.
+            </p>
+            <a class="btn btn-primary" href="https://airtable.com" target="_blank" rel="noreferrer">Get the toolkit</a>
+          </section>
+
+          <footer class="alert">
+            Want a guided build session? <a href="../contact.html">Book an advisory slot</a> and I?ll help tailor the workflow to your team.
+          </footer>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-col">
+          <a class="brand" href="../index.html">IBK <span>Blogs.</span></a>
+          <p>Practical, human-centered AI explorations by Ilias Benkhaled.</p>
+        </div>
+        <div class="footer-col">
+          <strong>Keep reading</strong>
+          <div class="footer-nav">
+            <a href="ai-customer-support.html">Support automation</a>
+            <a href="ai-prototyping-toolkit.html">Prototyping toolkit</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <strong>Connect</strong>
+          <div class="footer-nav">
+            <a href="mailto:hello@ibk.ai">hello@ibk.ai</a>
+            <a href="https://www.linkedin.com/in/ilias-benkhaled/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>? <span id="year"></span> IBK Blogs.</span>
+      </div>
+    </footer>
+    <script>
+      document.querySelectorAll('#year').forEach((node) => {
+        node.textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IBK Blogs - Everyday AI Use Cases</title>
+    <meta
+      name="description"
+      content="Discover how Ilias Benkhaled experiments with AI to simplify work and life through practical guides, experiments, and playbooks."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script defer src="assets/js/main.js"></script>
+  </head>
+  <body data-page="home" data-assets-root=".">
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+        <div class="nav-links">
+          <a data-nav="home" href="index.html">Home</a>
+          <a data-nav="blog" href="blog.html">Blog</a>
+          <a data-nav="about" href="about.html">About Me</a>
+          <a data-nav="contact" href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-content">
+          <div class="hero-text">
+            <span class="badge">Exploring everyday AI use cases</span>
+            <h1>I believe AI is for everyone. Let's make it useful in daily life.</h1>
+            <p>
+              Through personal projects, video breakdowns, and playbooks, I show how AI can
+              save time, automate routines, and unlock new ideas without needing a research
+              lab.
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="blog.html">Discover the latest guides</a>
+              <a class="btn btn-secondary" href="about.html">Explore my story</a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="quote">
+              "When AI augments our curiosity and creativity, technology stops feeling
+              complicated; it simply becomes a helpful teammate."
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Playbooks (LinguaLift only) -->
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Featured Playbooks</h2>
+            <p>
+              Deep dives on experiments I run with automation, data, and generative AI. Each
+              story includes examples you can adapt right away.
+            </p>
+          </div>
+
+          <div class="card-grid">
+            <article class="card">
+              <span class="card-tag">Playbook</span>
+              <h3>LinguaLift — Learn faster with lightweight AI prompts</h3>
+              <p>
+                A Chrome extension + Make.com flow to collect phrases from anywhere, build spaced-repetition lists,
+                and send bite-size practice reminders. Includes setup steps and my prompt kit.
+              </p>
+              <div class="card-footer">
+                <span>Updated recently</span>
+                <a href="blog/lingualift.html">View playbook &rarr;</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container grid-two">
+          <div>
+            <span class="badge">What you'll find here</span>
+            <h2>The Everyday AI Lab</h2>
+            <p>
+              IBK Blogs is a hub for frameworks, templates, and real experiments showing how AI
+              becomes a practical co-pilot. I document wins, lessons, and even the messy parts so
+              you can shortcut the learning curve.
+            </p>
+          </div>
+          <div class="feature-list">
+            <div class="feature">
+              <span class="feature-title">Automation recipes</span>
+              <p>
+                Step-by-step tutorials for building workflows in tools like Make, Zapier, and
+                custom scripts combining APIs and LLMs.
+              </p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">Decision frameworks</span>
+              <p>
+                Cheatsheets and prompts to evaluate when an AI idea is worth testing or scaling.
+              </p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">Real-world experiments</span>
+              <p>
+                Case studies from my personal builds and initiatives: what worked, what failed, and what I'd try next.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Removed "Latest resources" section -->
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-col">
+          <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
+          <p>
+            Experiments, guides, and stories from Ilias Benkhaled on how AI becomes a practical
+            partner at work and at home.
+          </p>
+        </div>
+        <div class="footer-col">
+          <strong>Explore</strong>
+          <div class="footer-nav">
+            <a href="blog.html">Latest articles</a>
+            <a href="about.html">About Ilias</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <strong>Stay in touch</strong>
+          <div class="footer-nav">
+            <a href="mailto:ilias.benkh1912@gmail.com">ilias.benkh1912@gmail.com</a>
+            <a href="https://www.linkedin.com/in/ilias-benkhaled/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/Ib191" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>&copy; <span id="year"></span> IBK Blogs. Crafted by Ilias Benkhaled.</span>
+        <span>Made with curiosity in Brussels.</span>
+      </div>
+    </footer>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+# Éditeurs / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Dépendances éventuelles
+node_modules/
+
+# Secrets
+.env

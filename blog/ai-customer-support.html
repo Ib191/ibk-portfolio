@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How AI Assistants Make Customer Support Scalable ? IBK Blogs</title>
+    <meta name="description" content="Designing AI support workflows that pair virtual agents with human experts to keep customer experience high." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <script defer src="../assets/js/main.js"></script>
+  </head>
+  <body data-page="blog" data-assets-root="..">
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="../index.html">IBK <span>Blogs.</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation">?</button>
+        <div class="nav-links">
+          <a data-nav="home" href="../index.html">Home</a>
+          <a data-nav="blog" href="../blog.html">Blog</a>
+          <a data-nav="about" href="../about.html">About Me</a>
+          <a data-nav="contact" href="../contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <article class="section">
+        <div class="container" style="display: grid; gap: 3rem;">
+          <header style="display: grid; gap: 1rem;">
+            <span class="badge">Automation ? Customer Experience</span>
+            <h1>How AI Assistants Make Customer Support Scalable</h1>
+            <div class="post-meta">
+              <span>Published July 12, 2025</span>
+              <span>6 min read</span>
+            </div>
+            <p class="text-small">
+              TL;DR ? Pair an AI-first triage system with detailed playbooks for human agents. The
+              result is faster answers, happier customers, and clean feedback loops for continuous
+              improvement.
+            </p>
+          </header>
+
+          <section class="feature-list">
+            <div class="feature">
+              <span class="feature-title">01. Map the journey</span>
+              <p>
+                We started by charting the top 30 support scenarios, grouped by complexity. Simple
+                FAQs moved to the virtual assistant, while nuanced issues stayed with people.
+              </p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">02. Train with real transcripts</span>
+              <p>
+                Feeding anonymized conversations into the large language model gave it context. We
+                generated response templates with reinforcement from support leads.
+              </p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">03. Close the human loop</span>
+              <p>
+                Agents capture outcomes with a single click. That feedback updates the assistant?s
+                suggestions weekly, ensuring the system keeps learning.
+              </p>
+            </div>
+          </section>
+
+          <section class="contact-card">
+            <h2>Metrics after 60 days</h2>
+            <div class="feature-list">
+              <div class="feature">
+                <span class="feature-title">45% automation</span>
+                <p>Nearly half of incoming chats resolved without human intervention.</p>
+              </div>
+              <div class="feature">
+                <span class="feature-title">+18 CSAT points</span>
+                <p>Customers rated answers more helpful thanks to consistent knowledge bases.</p>
+              </div>
+              <div class="feature">
+                <span class="feature-title">2x agent focus time</span>
+                <p>Specialists handled fewer repetitive questions and invested in complex cases.</p>
+              </div>
+            </div>
+            <p class="text-small">
+              Curious about the tech stack? We used Intercom, Make, and an Azure OpenAI deployment
+              with custom prompts stored in Airtable.
+            </p>
+          </section>
+
+          <footer class="alert">
+            Want the templates and prompts used in this project? Send me a note via the
+            <a href="../contact.html">contact page</a> with ?Support Playbook? in the subject.
+          </footer>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-col">
+          <a class="brand" href="../index.html">IBK <span>Blogs.</span></a>
+          <p>Practical, human-centered AI explorations by Ilias Benkhaled.</p>
+        </div>
+        <div class="footer-col">
+          <strong>Keep reading</strong>
+          <div class="footer-nav">
+            <a href="ai-productivity-stack.html">Productivity stack</a>
+            <a href="ai-prototyping-toolkit.html">Prototyping toolkit</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <strong>Connect</strong>
+          <div class="footer-nav">
+            <a href="mailto:hello@ibk.ai">hello@ibk.ai</a>
+            <a href="https://www.linkedin.com/in/ilias-benkhaled/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>? <span id="year"></span> IBK Blogs.</span>
+      </div>
+    </footer>
+    <script>
+      document.querySelectorAll('#year').forEach((node) => {
+        node.textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
+</html>
+

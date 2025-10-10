@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LinguaLift — Capture, translate & review phrases as you read | IBK Blogs</title>
+    <meta
+      name="description"
+      content="LinguaLift is a lightweight workflow (Chrome + Make) to capture phrases from anywhere, auto-translate, tag by context, and review them later without friction."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <script defer src="../assets/js/main.js"></script>
+  </head>
+
+  <body data-page="blog" data-assets-root="..">
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="../index.html">IBK <span>Blogs.</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+        <div class="nav-links">
+          <a data-nav="home" href="../index.html">Home</a>
+          <a data-nav="blog" href="../blog.html">Blog</a>
+          <a data-nav="about" href="../about.html">About Me</a>
+          <a data-nav="contact" href="../contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <article class="section">
+        <div class="container" style="display: grid; gap: 3rem;">
+          <!-- HEADER -->
+          <header style="display: grid; gap: 1rem;">
+            <span class="badge">Language · Prototyping</span>
+            <h1>LinguaLift — a frictionless way to learn from your real reading</h1>
+            <div class="post-meta">
+              <span>Published Oct 7, 2025</span>
+              <span>5 min read</span>
+            </div>
+            <p class="text-small">
+              A minimal workflow that lets you grab any phrase while browsing, translate it instantly,
+              tag by context (work, travel, football, etc.), and review the best bits later. Built with a tiny Chrome helper
+              and a Make scenario — no heavyweight app needed.
+            </p>
+          </header>
+
+          <!-- DEMO PLACEHOLDER -->
+          <section id="demo" style="display: grid; gap: 1rem; place-items: center;">
+            <h2>🎥 Demo</h2>
+            <p class="text-small">
+              Watch how LinguaLift captures a phrase, sends it to Make, translates it, and logs it for review.
+            </p>
+            <!-- Replace this with your real embed later -->
+            <div
+              style="
+                width: 100%;
+                max-width: 800px;
+                aspect-ratio: 16 / 9;
+                background: #0d1117;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #8b949e;
+                font-size: 0.95rem;
+                border: 1px solid #1f2937;
+              "
+            >
+              Demo video coming soon
+            </div>
+          </section>
+
+          <!-- OVERVIEW -->
+          <section class="feature-list">
+            <div class="feature">
+              <span class="feature-title">Capture from anywhere</span>
+              <p>Highlight text in Chrome and send it with one click. The page title and URL are captured for context.</p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">Translate & enrich</span>
+              <p>Make calls an LLM/translation step, adds phonetics (if needed), and suggests tags based on topic.</p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">Review without friction</span>
+              <p>Entries land in a simple table (Notion/Sheets/Airtable—pick your store) with filters for quick sessions.</p>
+            </div>
+          </section>
+
+          <!-- HOW IT WORKS -->
+          <section style="display: grid; gap: 1rem;">
+            <h2>How it works</h2>
+            <ol class="text-small" style="display: grid; gap: 0.5rem; padding-left: 1rem;">
+              <li><strong>Chrome helper</strong>: a minimal extension adds a context-menu entry “Send to LinguaLift”. It packages selection, source URL, and language.</li>
+              <li><strong>Make webhook</strong>: receives the payload, translates the selection, and proposes tags (domain + tone).</li>
+              <li><strong>Storage</strong>: the record is saved to your store (I use Notion DB; Google Sheets works too).</li>
+              <li><strong>Drill</strong>: a review view shows “new / due / starred”. Optional spaced-repetition field increments on each pass.</li>
+            </ol>
+          </section>
+
+          <!-- SETUP -->
+          <section class="contact-card">
+            <h2>Set it up in 10 minutes</h2>
+            <p>
+              Use the files below, change the webhook URL in the extension, and pick your data store. The flow is provider-agnostic.
+            </p>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <a class="btn btn-primary" href="../assets/lingualift/extension.zip" download>Download Chrome helper</a>
+              <a class="btn" href="../assets/lingualift/make-blueprint.json" download>Make scenario (JSON)</a>
+              <a class="btn" href="../assets/lingualift/notion-template.txt" download>Notion DB fields</a>
+            </div>
+          </section>
+
+          <!-- CONFIG -->
+          <section style="display: grid; gap: 1rem;">
+            <h2>Minimal configuration</h2>
+            <p class="text-small">In <code>extension/background.js</code>, set your Make webhook:</p>
+<pre class="code-block"><code>const WEBHOOK_URL = "https://hook.eu1.make.com/your-webhook-id";
+chrome.runtime.onMessage.addListener((payload) =&gt; {
+  fetch(WEBHOOK_URL, { method: "POST", body: JSON.stringify(payload) });
+});</code></pre>
+            <p class="text-small">In Make, map fields like <code>text</code>, <code>source_url</code>, <code>lang_from</code>, <code>lang_to</code>, then add:</p>
+            <ul class="text-small" style="display: grid; gap: 0.25rem; padding-left: 1rem;">
+              <li>Translate (provider of your choice)</li>
+              <li>Generate tags (LLM) — limit to 2–3 concise tags</li>
+              <li>Write row to Notion/Sheets/Airtable</li>
+            </ul>
+          </section>
+
+          <!-- NOTES -->
+          <section class="alert">
+            <strong>Privacy note:</strong> keep sensitive content out of the capture flow. For public pages, the URL is stored for context; disable this if you prefer local-only logs.
+          </section>
+
+          <!-- CTA -->
+          <footer class="alert">
+            Feedback or ideas to improve the flow? <a href="mailto:hello@ibk.ai">hello@ibk.ai</a>
+          </footer>
+        </div>
+      </article>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-col">
+          <a class="brand" href="../index.html">IBK <span>Blogs.</span></a>
+          <p>Practical, human-centered AI explorations by Ilias Benkhaled.</p>
+        </div>
+        <div class="footer-col">
+          <strong>Keep reading</strong>
+          <div class="footer-nav">
+            <a href="ai-prototyping-toolkit.html">Prototyping toolkit</a>
+            <a href="../blog.html">All posts</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <strong>Connect</strong>
+          <div class="footer-nav">
+            <a href="mailto:hello@ibk.ai">hello@ibk.ai</a>
+            <a
+              href="https://www.linkedin.com/in/ilias-benkhaled/"
+              target="_blank"
+              rel="noreferrer"
+              >LinkedIn</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>&copy; <span id="year"></span> IBK Blogs.</span>
+        <span>Keep experimenting.</span>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelectorAll('#year').forEach((node) => {
+        node.textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
+</html>

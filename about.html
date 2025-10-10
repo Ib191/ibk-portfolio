@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About Ilias Benkhaled - IBK Blogs</title>
+    <meta
+      name="description"
+      content="Get to know Ilias Benkhaled, the technology advisor behind IBK Blogs. Explore his journey across consulting, data, travel, and sports."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script defer src="assets/js/main.js"></script>
+
+    <style>
+      /* ===== HERO SECTION ===== */
+      .about-hero {
+        padding-top: 80px; /* adds a bit of space so it visually aligns with Blog */
+        padding-bottom: 0;
+      }
+      .about-hero .container {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+      .about-hero-header {
+        text-align: left;
+      }
+      .about-hero-header h1 {
+        margin-top: 8px;
+        margin-bottom: 16px;
+      }
+
+      /* avatar + text side-by-side */
+      .about-intro {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .about-avatar {
+        width: 150px;     /* was 112px */
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #00B3FF; /* optional: brand ring */
+        box-shadow: 0 0 12px rgba(0, 179, 255, 0.15); /* optional soft glow */
+      }
+      .about-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .about-text p {
+        margin: 0 0 12px;
+        max-width: 60ch;
+      }
+
+      @media (max-width: 768px) {
+        .about-intro {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .about-avatar {
+          width: 90px;
+          height: 90px;
+        }
+      }
+
+      /* small spacing before next section */
+      .section {
+        padding-top: 24px;
+      }
+
+      /* Background title style */
+      .background-wrap > h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-muted, #a9abb3);
+        margin-bottom: 12px;
+      }
+    </style>
+  </head>
+
+  <body data-page="about" data-assets-root=".">
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+        <div class="nav-links">
+          <a data-nav="home" href="index.html">Home</a>
+          <a data-nav="blog" href="blog.html">Blog</a>
+          <a data-nav="about" href="about.html" aria-current="page">About Me</a>
+          <a data-nav="contact" href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <!-- ===== HERO ===== -->
+      <section class="hero about-hero">
+        <div class="container">
+          <div class="about-hero-header">
+            <span class="badge">About Me</span>
+            <h1>Hi, I’m Ilias Benkhaled</h1>
+          </div>
+
+          <div class="about-intro">
+            <div class="about-avatar">
+              <img
+                src="assets/images/Picture-ilias.jpg"
+                alt="Portrait of Ilias Benkhaled"
+              />
+            </div>
+
+            <div class="about-text">
+              <p>
+                I’ve always been curious about how things work — whether in sports, travel, or technology.  
+                  Football taught me discipline, travel gave me perspective, and that same curiosity eventually  
+                  led me to explore how AI could make our lives simpler and smarter.
+              </p>
+
+              <div class="hero-cta">
+                <a class="btn btn-secondary" href="blog.html">Read my latest experiments</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== WHY I STARTED + BACKGROUND ===== -->
+      <section class="section">
+        <div class="container grid-two">
+          <div>
+            <h2>My vision about AI</h2>
+            <p>
+              My interest in AI started when I realized how much time we spend on repetitive, manual tasks — and how often our creativity gets buried under routine. 
+              During my early projects in data and consulting, I kept asking myself: Why are we still doing things the hard way when technology could help us think better?
+            </p>
+            <p>
+              That question never left me. It pushed me to explore how AI could simplify the complex, turn data into clarity, and make work feel more human. 
+              Over time, I stopped seeing AI as just a tool  it became a way to amplify curiosity and creativity.
+            </p>
+            <p>
+              I believe AI is for everyone. With the tools we have today, anyone can use it to learn faster, automate what slows them down, 
+              and focus on what truly matters. My goal with IBK Blogs is to make AI approachable — to show that you don’t need to be a researcher or coder to 
+              benefit from it. You just need curiosity and a willingness to experiment.
+            </p>
+          
+            <hr style="border: 0; height: 1px; background: #222; margin: 2rem 0;">
+            <h2>Why I started IBK Blogs</h2>
+            <p>
+              IBK Blogs is where that belief turns into action. It’s my space to share how AI can actually fit into 
+              everyday life — through small projects, automations, and workflows that make work feel less mechanical 
+              and more meaningful.  
+            </p>
+            <p>
+              Here, I document experiments, lessons, and real use cases — not to impress, but to inspire others 
+              to try. I want to show that AI isn’t just for tech experts; it’s for consultants, creators, students, 
+              and anyone who wants to think smarter about how they use their time.
+            </p>
+            <p>
+              Ultimately, this blog is my way of exploring what’s possible when curiosity meets technology — 
+              and of sharing that journey so others can do the same.
+            </p>
+            </div>
+          <div class="background-wrap">
+            <h2>Background</h2>
+            <div class="timeline">
+
+
+
+
+              <div class="timeline-item is-collapsible">
+                <div class="ti-header">
+                  <span class="ti-year">Today</span>
+                  <strong class="ti-title">Technology Advisor @ KPMG Belgium</strong>
+
+                  <!-- the toggle button -->
+                  <button class="ti-toggle"
+                          aria-expanded="false"
+                          aria-controls="ti-extra-1">
+                    Read more
+                  </button>
+                </div>
+
+                <p>Designing strategies that combine data, cloud, and AI to drive business impact.</p>
+
+                <!-- hidden, animated content -->
+                <div id="ti-extra-1" class="ti-extra">
+                  <p>What that looks like in practice:</p>
+                  <ul>
+                    <li>Built data products that turn siloed datasets into decision-ready insights.</li>
+                    <li>Prototyped AI-assisted workflows that save hours per week for analysts.</li>
+                    <li>Partnered with business teams to measure impact, not just model accuracy.</li>
+                  </ul>
+                </div>
+              </div>
+
+
+                <div class="timeline-item is-collapsible">
+                <div class="ti-header">
+                  <span class="ti-year">2024</span>
+                  <strong class="ti-title">Le Wagon Data Science &amp; AI Bootcamp</strong>
+
+                  <!-- the toggle button -->
+                  <button class="ti-toggle"
+                          aria-expanded="false"
+                          aria-controls="ti-extra-1">
+                    Read more
+                  </button>
+                </div>
+
+                <p>Successfully completed a rigorous 6-month program focused on the most sought-after skills in data science and artificial intelligence.</p>
+
+                <!-- hidden, animated content -->
+                <div id="ti-extra-1" class="ti-extra">
+                  <p>Acquired robust expertise in:</p>
+                  <ul>
+                    <li>Data Analysis & Visualization: Leveraged tools such as Python, SQL, and Tableau to derive actionable insights from complex datasets.</li>
+                    <li>Statistical & Machine Learning: Applied advanced techniques to address and solve real-world challenges effectively.</li>
+                    <li>Deep Learning: Designed and deployed sophisticated models using TensorFlow and PyTorch, demonstrating strong technical proficiency.</li>
+                    <li>MLOps Implementation: Adopted best practices with AWS, Docker, and Airflow to streamline and scale machine learning operations.</li>
+                    <li>Generative AI: Created innovative and realistic content using cutting-edge AI models like GPT-4 and Bert.</li>
+                  </ul>
+                </div>
+              </div>
+
+
+                <div class="timeline-item is-collapsible">
+                <div class="ti-header">
+                  <span class="ti-year">2023</span>
+                  <strong class="ti-title">Erasmus Exchange in New Zealand</strong>
+
+                  <!-- the toggle button -->
+                  <button class="ti-toggle"
+                          aria-expanded="false"
+                          aria-controls="ti-extra-1">
+                    Read more
+                  </button>
+                </div>
+
+                <p>Studied at <strong>Auckland University of Technology</strong> and graduated <em>magna cum laude</em>. </p>
+
+                <!-- hidden, animated content -->
+                <div id="ti-extra-1" class="ti-extra">
+                  <p>My Erasmus exchange in New Zealand was one of the most eye-opening experiences of my life.  
+                      Living so far from home taught me to adapt quickly, stay curious, and embrace new ways of thinking.  
+                      I discovered a culture that values balance, authenticity, and respect for both people and nature —  
+                      a mindset that still inspires how I approach work and collaboration today.
+                    </p>
+                  <ul>
+                    <li>Learned to work and study in a truly international environment, connecting with people from every continent.</li>
+                    <li>Discovered the importance of curiosity and open-mindedness in solving problems together.</li>
+                    <li>Gained perspective on how innovation can remain human-centered — something I carry into every project now.</li>
+                  </ul>
+                </div>
+              </div>
+
+                <div class="timeline-item is-collapsible">
+                <div class="ti-header">
+                  <span class="ti-year">2023</span>
+                  <strong class="ti-title">Solvay Brussels School</strong>
+
+                  <!-- the toggle button -->
+                  <button class="ti-toggle"
+                          aria-expanded="false"
+                          aria-controls="ti-extra-1">
+                    Read more
+                  </button>
+                </div>
+
+                <p>Msc. in Business Engineering with a specialization in Data Science and Big Data.</p>
+
+                <!-- hidden, animated content -->
+                <div id="ti-extra-1" class="ti-extra">
+                  <p>During this program, I discovered how much I enjoy turning  
+                    abstract data into clear insights that drive decisions. What started as curiosity for numbers  
+                    quickly became a genuine passion for analytics, technology, and the stories data can tell.
+                    </p>
+                  <ul>
+                    <li>Explored topics such as predictive modeling, econometrics, and machine learning.</li>
+                    <li>Worked on hands-on projects that combined technical tools with business strategy.</li>
+                    <li>Realized how data can bridge the gap between intuition and evidence in decision-making.</li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== HOW I WORK ===== -->
+      <section class="section">
+        <div class="container grid-two">
+          <div>
+            <h2>How I work</h2>
+            <div class="feature-list">
+              <div class="feature">
+                <span class="feature-title">Spot the problem</span>
+                <p>Most of my projects start with a small friction in my daily life — something that feels repetitive, slow, or unclear. 
+                    I like turning those frustrations into opportunities to build smarter systems.</p>
+              </div>
+              <div class="feature">
+                <span class="feature-title">Stay curious</span>
+                <p>Curiosity is my main driver. I explore, test, and learn by doing — whether it’s automating a workflow, 
+        experimenting with new tools, or understanding how AI can simplify a task.</p>
+              </div>
+              <div class="feature">
+                <span class="feature-title">Design and implement</span>
+                <p>Once I find an idea worth pursuing, I move fast — from concept to prototype. 
+        I enjoy building simple, tangible solutions and sharing the process so others can replicate or improve it.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="quote">
+            “My mission is to make AI approachable. When people understand the possibilities, they can build solutions that matter to their communities.”
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-col">
+          <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
+          <p>Practical, human-centered AI explorations by Ilias Benkhaled.</p>
+        </div>
+        <div class="footer-col">
+          <strong>Explore</strong>
+          <div class="footer-nav">
+            <a href="blog.html">Latest articles</a>
+            <a href="index.html#newsletter">Newsletter</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <strong>Connect</strong>
+          <div class="footer-nav">
+            <a href="mailto:ilias.benkh1912@gmail.com">ilias.benkh1912@gmail.com</a>
+            <a href="https://www.linkedin.com/in/ilias-benkhaled/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/Ib191" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>&copy; <span id="year"></span> IBK Blogs. Crafted by Ilias Benkhaled.</span>
+        <span>Thank you for reading.</span>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelectorAll('#year').forEach((n) => (n.textContent = new Date().getFullYear()));
+    </script>
+  </body>
+</html>

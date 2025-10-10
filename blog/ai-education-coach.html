@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Langualift ? IBK Blogs</title>
+    <meta name="description" content="How adaptive AI tutors can tailor study plans, track progress, and keep learners motivated." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <script defer src="../assets/js/main.js"></script>
+  </head>
+  <body data-page="blog" data-assets-root="..">
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="../index.html">IBK <span>Blogs.</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation">?</button>
+        <div class="nav-links">
+          <a data-nav="home" href="../index.html">Home</a>
+          <a data-nav="blog" href="../blog.html">Blog</a>
+          <a data-nav="about" href="../about.html">About Me</a>
+          <a data-nav="contact" href="../contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <article class="section">
+        <div class="container" style="display: grid; gap: 3rem;">
+          <header style="display: grid; gap: 1rem;">
+            <span class="badge">Education ? Personalization</span>
+            <h1>Personalized Learning Plans with an AI Study Coach</h1>
+            <div class="post-meta">
+              <span>Published May 22, 2025</span>
+              <span>9 min read</span>
+            </div>
+            <p class="text-small">
+              Combining adaptive prompts, learning analytics, and habit loops to keep adult
+              learners motivated.
+            </p>
+          </header>
+
+          <section class="feature-list">
+            <div class="feature">
+              <span class="feature-title">Learner onboarding</span>
+              <p>Students answer a 5-minute survey to set goals, preferred pacing, and blockers.</p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">Weekly plans</span>
+              <p>An AI-generated outline suggests lessons, practice sessions, and reflection prompts.</p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">Motivation loops</span>
+              <p>Each win triggers personalized feedback and quick wins to keep momentum.</p>
+            </div>
+          </section>
+
+          <section class="contact-card">
+            <h2>Results from a 50-student pilot</h2>
+            <div class="feature-list">
+              <div class="feature"><span class="feature-title">Completion rate</span><p>82% finished the curriculum vs. 54% without the coach.</p></div>
+              <div class="feature"><span class="feature-title">Confidence</span><p>Self-reported confidence grew by 24 percentage points.</p></div>
+              <div class="feature"><span class="feature-title">Instructor time</span><p>Weekly check-ins dropped from 30 to 12 hours.</p></div>
+            </div>
+          </section>
+
+          <footer class="alert">
+            I?m collaborating with educators to open-source parts of this playbook. Leave a note on
+            the <a href="../contact.html">contact page</a> if you?d like to participate.
+          </footer>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-col">
+          <a class="brand" href="../index.html">IBK <span>Blogs.</span></a>
+          <p>Practical, human-centered AI explorations by Ilias Benkhaled.</p>
+        </div>
+        <div class="footer-col">
+          <strong>Keep reading</strong>
+          <div class="footer-nav">
+            <a href="ai-for-research.html">Agentic research</a>
+            <a href="ai-prototyping-toolkit.html">Prototyping toolkit</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <strong>Connect</strong>
+          <div class="footer-nav">
+            <a href="mailto:hello@ibk.ai">hello@ibk.ai</a>
+            <a href="https://www.linkedin.com/in/ilias-benkhaled/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>? <span id="year"></span> IBK Blogs.</span>
+      </div>
+    </footer>
+    <script>
+      document.querySelectorAll('#year').forEach((node) => {
+        node.textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
+</html>
+

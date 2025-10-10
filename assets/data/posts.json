@@ -1,0 +1,56 @@
+[
+  {
+    "id": "ai-customer-support",
+    "title": "How AI Assistants Make Customer Support Scalable",
+    "excerpt": "A look at AI-driven support workflows that blend chatbots with human expertise to keep response times low and satisfaction high.",
+    "tags": ["Automation", "Customer Experience"],
+    "publishedOn": "2025-07-12",
+    "readTime": "6 min read",
+    "link": "blog/ai-customer-support.html"
+  },
+  {
+    "id": "ai-productivity-stack",
+    "title": "Building a Personal Productivity Stack with Generative AI",
+    "excerpt": "How I combine AI note-taking, task planning, and summarization tools to save hours each week.",
+    "tags": ["Productivity", "No-Code"],
+    "publishedOn": "2025-08-02",
+    "readTime": "8 min read",
+    "link": "blog/ai-productivity-stack.html"
+  },
+  {
+    "id": "ai-for-research",
+    "title": "Research Faster with Agentic AI Flows",
+    "excerpt": "Designing repeatable research processes by orchestrating large language models, automations, and knowledge bases.",
+    "tags": ["Knowledge Work", "Agents"],
+    "publishedOn": "2025-09-01",
+    "readTime": "7 min read",
+    "link": "blog/ai-for-research.html"
+  },
+  {
+    "id": "computer-vision-quality",
+    "title": "Computer Vision for Quality Assurance on the Factory Floor",
+    "excerpt": "Lessons from prototyping an inspection system that flags defects in seconds with affordable hardware.",
+    "tags": ["Industry", "Computer Vision"],
+    "publishedOn": "2025-06-18",
+    "readTime": "5 min read",
+    "link": "blog/computer-vision-quality.html"
+  },
+  {
+    "id": "ai-education-coach",
+    "title": "Personalized Learning Plans with an AI Study Coach",
+    "excerpt": "Experimenting with AI tutors that adapt to each learner's pace while keeping motivation high.",
+    "tags": ["Education", "Personalization"],
+    "publishedOn": "2025-05-22",
+    "readTime": "9 min read",
+    "link": "blog/ai-education-coach.html"
+  },
+  {
+    "id": "ai-prototyping-toolkit",
+    "title": "My Toolkit for Rapid AI Prototyping",
+    "excerpt": "Stacking notebooks, low-code tools, and API sandboxes to go from idea to demo in under a day.",
+    "tags": ["Prototyping", "Tools"],
+    "publishedOn": "2025-09-15",
+    "readTime": "6 min read",
+    "link": "blog/ai-prototyping-toolkit.html"
+  }
+]

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact - IBK Blogs</title>
+    <meta name="description" content="Share a real-life problem you’ve noticed. I'm collecting issues people face day-to-day to explore with AI—no sales, no offers." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script defer src="assets/js/main.js"></script>
+    <style>
+      /* Safety: ensure any leftover newsletter blocks are hidden even if included elsewhere */
+      .newsletter, #newsletter, [data-block="newsletter"] { display: none !important; }
+    </style>
+  </head>
+  <body data-page="contact" data-assets-root=".">
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+        <div class="nav-links">
+          <a data-nav="home" href="index.html">Home</a>
+          <a data-nav="blog" href="blog.html">Blog</a>
+          <a data-nav="about" href="about.html">About Me</a>
+          <a data-nav="contact" href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <span class="badge">Community input</span>
+              <h1>Tell me about a problem you see</h1>
+            </div>
+            <p>
+              I’m collecting everyday problems people run into—at work, at school, or in life—to explore them in articles and experiments.
+              I’m not selling services. If you’re open to it, you can opt in to be contacted for follow-up questions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container grid-two">
+          <div class="contact-card">
+            <div class="feature-list">
+              <div class="feature">
+                <span class="feature-title">What to submit</span>
+                <p>Briefly describe the issue, who it affects, and why it matters. Concrete examples are super helpful.</p>
+              </div>
+              <div class="feature">
+                <span class="feature-title">How I’ll use it</span>
+                <p>I may aggregate anonymized insights into blog posts or prototypes to help others facing similar problems.</p>
+              </div>
+              <div class="feature">
+                <span class="feature-title">Privacy</span>
+                <p>No commercial outreach. I’ll only contact you if you explicitly opt in below.</p>
+              </div>
+            </div>
+            <div class="alert">
+              Prefer email? Write to <a href="mailto:ilias.benkh1912@gmail.com">ilias.benkh1912@gmail.com</a>.
+            </div>
+          </div>
+
+          <!-- Problem intake form -->
+          <div class="contact-card">
+            <form action="https://formspree.io/f/mnnaejng" method="POST">
+              <!-- Basic info -->
+              <div class="field">
+                <label for="name">Name (optional)</label>
+                <input id="name" name="name" type="text" placeholder="First name or alias" />
+              </div>
+              <div class="field">
+                <label for="email">Email (only if you want a reply)</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" />
+              </div>
+
+              <!-- Problem details -->
+              <div class="field">
+                <label for="context">Where does the problem happen?</label>
+                <input id="context" name="context" type="text" placeholder="e.g., small business admin, university coursework, team meetings, daily commute" />
+              </div>
+              <div class="field">
+                <label for="issue">Describe the issue</label>
+                <textarea id="issue" name="issue" placeholder="What’s the problem? What’s frustrating, slow, confusing, or error-prone?" required></textarea>
+              </div>
+              <div class="field">
+                <label for="impact">Who is affected & what’s the impact?</label>
+                <textarea id="impact" name="impact" placeholder="e.g., teammates waste 3h/week, students fail to notice deadlines, family members miss meds"></textarea>
+              </div>
+              <div class="field">
+                <label for="current-workarounds">Any current workaround?</label>
+                <textarea id="current-workarounds" name="current_workarounds" placeholder="Manual steps, Excel macros, copy-paste, scripts…"></textarea>
+              </div>
+              <div class="field">
+                <label for="constraints">Constraints (optional)</label>
+                <input id="constraints" name="constraints" type="text" placeholder="Budget, tools, policies, privacy, etc." />
+              </div>
+
+              <!-- Consent -->
+              <div class="field" style="display:flex;gap:.6rem;align-items:flex-start;">
+                <input id="consent-contact" name="consent_contact" type="checkbox" value="yes" style="margin-top:.35rem;" />
+                <label for="consent-contact">You may contact me for clarifications about this problem.</label>
+              </div>
+              <div class="field" style="display:flex;gap:.6rem;align-items:flex-start;">
+                <input id="consent-anon" name="consent_anonymous" type="checkbox" value="yes" style="margin-top:.35rem;" />
+                <label for="consent-anon">If you write about this, please keep it anonymous.</label>
+              </div>
+
+              <button class="btn btn-primary" type="submit">Submit problem</button>
+              <input type="hidden" name="_subject" value="New problem submission from contact page" />
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Newsletter section removed/hidden to avoid any promotional angle -->
+      <!--
+      <section class="section newsletter" data-block="newsletter" aria-hidden="true"></section>
+      -->
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-col">
+          <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
+          <p>Practical, human-centered AI explorations by Ilias Benkhaled.</p>
+        </div>
+        <div class="footer-col">
+          <strong>Explore</strong>
+          <div class="footer-nav">
+            <a href="blog.html">Latest articles</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <strong>Connect</strong>
+          <div class="footer-nav">
+            <a href="mailto:ilias.benkh1912@gmail.com">ilias.benkh1912@gmail.com</a>
+            <a href="https://www.linkedin.com/in/ilias-benkhaled/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/Ib191" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span><span id="year"></span> IBK Blogs.</span>
+        <span>Let's build the future responsibly.</span>
+      </div>
+    </footer>
+    <script>
+      document.querySelectorAll('#year').forEach((node) => {
+        node.textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
+</html>

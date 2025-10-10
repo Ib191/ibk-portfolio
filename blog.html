@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blog - IBK Blogs</title>
+    <meta
+      name="description"
+      content="Browse practical AI use cases, automation recipes, and prototyping notes from Ilias Benkhaled."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script defer src="assets/js/main.js"></script>
+  </head>
+
+  <body data-page="blog" data-assets-root=".">
+    <!-- Navigation -->
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+        <div class="nav-links">
+          <a data-nav="home" href="index.html">Home</a>
+          <a data-nav="blog" href="blog.html" class="active">Blog</a>
+          <a data-nav="about" href="about.html">About Me</a>
+          <a data-nav="contact" href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <span class="badge">The Everyday AI Log</span>
+              <h1>Guides, experiments & playbooks</h1>
+            </div>
+            <p>
+              Each article documents how I tackle real problems with AI : from designing
+              automation flows to building prototypes and measuring impact inside teams.
+            </p>
+          </div>
+
+          <!-- Custom alert linking to LinguaLift -->
+          <div class="alert">
+            New here? Start with <a href="blog/lingualift.html">LinguaLift</a> — my Chrome extension
+            experiment to make language learning effortless.
+          </div>
+        </div>
+      </section>
+
+      <!-- Single Article Section -->
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Latest article</h2>
+            <p></p>
+          </div>
+
+          <div class="post-list">
+            <!-- Only one card for LinguaLift -->
+            <a class="post-card" href="blog/lingualift.html">
+              <div class="post-meta">7 Oct 2025 · 5 min read · Prototyping</div>
+              <h3 class="post-title">LinguaLift — My Chrome workflow to boost language input</h3>
+              <p class="post-excerpt">
+                A lightweight extension + Make scenario that captures new phrases while reading,
+                auto-translates, tags by context, and helps you review them later without friction.
+              </p>
+              <span class="post-cta">Read the story →</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categories Section -->
+      <section class="section">
+        <div class="container grid-two">
+          <div>
+            <h2>Categories I focus on</h2>
+            <p>
+              These themes guide what I explore. Expect experiments that blend strategy with
+              hands-on builds.
+            </p>
+          </div>
+          <div class="feature-list">
+            <div class="feature">
+              <span class="feature-title">Automation & Ops</span>
+              <p>Translating business processes into AI-driven workflows that save time.</p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">Agentic systems</span>
+              <p>
+                Designing reliable AI agents by mixing context, guardrails, and human oversight.
+              </p>
+            </div>
+            <div class="feature">
+              <span class="feature-title">Industry case studies</span>
+              <p>
+                Applying AI to consulting, finance, manufacturing, and education problems I
+                encounter.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-col">
+          <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
+          <p>Practical, human-centered AI explorations by Ilias Benkhaled.</p>
+        </div>
+
+        <div class="footer-col">
+          <strong>Explore</strong>
+          <div class="footer-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <strong>Stay updated</strong>
+          <div class="footer-nav">
+            <a href="mailto:ilias.benkh1912@gmail.com">ilias.benkh1912@gmail.com</a>
+            <a
+              href="https://www.linkedin.com/in/ilias-benkhaled/"
+              target="_blank"
+              rel="noreferrer"
+              >LinkedIn</a
+            >
+            
+            <a href="https://github.com/Ib191" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <span>&copy; <span id="year"></span> IBK Blogs.</span>
+        <span>Keep experimenting.</span>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelectorAll('#year').forEach((node) => {
+        node.textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
+</html>
