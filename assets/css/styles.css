@@ -968,3 +968,23 @@ html, body { overflow-x: hidden; }
     gap: 1rem;
   }
 }
+
+/* Keep the "Language · Prototyping" badge the same size as other badges */
+@media (max-width: 768px) {
+  article header .badge {
+    justify-self: start;      /* don't stretch in the grid */
+    width: max-content;       /* size to content */
+    display: inline-flex;     /* consistent pill sizing */
+    white-space: nowrap;      /* keep on one line like other badges */
+    /* (optional) ensure same typography/padding as your global badge */
+    /* font-size: 0.95rem; padding: .35rem .75rem; border-radius: 9999px; */
+  }
+}
+
+/* === Fix badge width for all screens === */
+article header .badge {
+  justify-self: start;       /* prevents full-width stretching in grid containers */
+  width: max-content;        /* shrink to fit its text */
+  display: inline-flex;
+  white-space: nowrap;       /* avoid line breaks */
+}
