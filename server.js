@@ -5,10 +5,13 @@ const app = express();
 app.disable('x-powered-by');
 app.enable('trust proxy');
 
-app.use((req, res, next) => {
-  if (req.secure) return next();
-  return res.redirect(301, `https://${req.headers.host}${req.originalUrl}`);
-});
+// Only redirect to HTTPS in production
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.secure) return next();
+    return res.redirect(301, `https://${req.headers.host}${req.originalUrl}`);
+  });
+}
 
 app.use((req, res, next) => {
   const host = req.headers.host || '';

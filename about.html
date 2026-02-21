@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      (function(){var t=localStorage.getItem('ibk-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>About Ilias Benkhaled - IBK Blogs</title>
@@ -14,93 +17,59 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
 
     <style>
-      /* ===== HERO SECTION ===== */
-      .about-hero {
-        padding-top: 80px; /* adds a bit of space so it visually aligns with Blog */
-        padding-bottom: 0;
-      }
-      .about-hero .container {
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
-      }
-      .about-hero-header {
-        text-align: left;
-      }
-      .about-hero-header h1 {
-        margin-top: 8px;
-        margin-bottom: 16px;
-      }
+      .about-hero { padding-top: 80px; padding-bottom: 0; }
+      .about-hero .container { display: flex; flex-direction: column; gap: 32px; }
+      .about-hero-header { text-align: left; display: grid; gap: 1rem; }
+      .about-hero-header h1 { margin: 0; }
 
-      /* avatar + text side-by-side */
-      .about-intro {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-      }
+      .about-intro { display: flex; align-items: center; gap: 24px; }
       .about-avatar {
-        width: 150px;     /* was 112px */
-        height: 150px;
-        border-radius: 50%;
-        overflow: hidden;
-        border: 2px solid #00B3FF; /* optional: brand ring */
-        box-shadow: 0 0 12px rgba(0, 179, 255, 0.15); /* optional soft glow */
+        width: 150px; height: 150px;
+        border-radius: 50%; overflow: hidden;
+        border: 3px solid var(--accent-primary);
+        box-shadow: var(--shadow-md);
       }
-      .about-avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .about-text p {
-        margin: 0 0 12px;
-        max-width: 60ch;
-      }
+      .about-avatar img { width: 100%; height: 100%; object-fit: cover; }
+      .about-text p { margin: 0 0 12px; max-width: 60ch; }
 
       @media (max-width: 768px) {
-        .about-intro {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .about-avatar {
-          width: 90px;
-          height: 90px;
-        }
+        .about-intro { flex-direction: column; align-items: flex-start; }
+        .about-avatar { width: 100px; height: 100px; }
       }
 
-      /* small spacing before next section */
-      .section {
-        padding-top: 24px;
-      }
-
-      /* Background title style */
+      body[data-page="about"] .section { padding-top: 24px; }
       .background-wrap > h2 {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--text-muted, #a9abb3);
-        margin-bottom: 12px;
+        font-size: 1.1rem; font-weight: 600;
+        color: var(--text-tertiary); margin-bottom: 12px;
       }
     </style>
   </head>
 
   <body data-page="about" data-assets-root=".">
+    <a class="skip-to-content" href="#main">Skip to content</a>
     <nav>
       <div class="container nav-inner">
         <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
-        <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
-        <div class="nav-links">
-          <a data-nav="home" href="index.html">Home</a>
-          <a data-nav="blog" href="blog.html">Blog</a>
-          <a data-nav="about" href="about.html" aria-current="page">About Me</a>
-          <a data-nav="contact" href="contact.html">Contact</a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a data-nav="home" href="index.html">Home</a>
+            <a data-nav="experiments" href="blog.html">Experiments</a>
+            <a data-nav="learn" href="learn.html">Learn with me</a>
+            <a data-nav="about" href="about.html" aria-current="page">About Me</a>
+            <a data-nav="contact" href="contact.html">Contact</a>
+          </div>
+          <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+          <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
         </div>
       </div>
     </nav>
 
-    <main>
+    <main id="main">
       <!-- ===== HERO ===== -->
       <section class="hero about-hero">
         <div class="container">
@@ -111,7 +80,7 @@
 
           <div class="about-intro">
             <div class="about-avatar">
-            <img src="/assets/images/Picture-ilias.jpg" alt="Portrait of Ilias Benkhaled">
+            <img src="assets/images/Picture-ilias.jpg" alt="Portrait of Ilias Benkhaled">
             </div>
 
             <div class="about-text">
@@ -148,7 +117,7 @@
               benefit from it. You just need curiosity and a willingness to experiment.
             </p>
           
-            <hr style="border: 0; height: 1px; background: #222; margin: 2rem 0;">
+            <hr style="border: 0; height: 1px; background: var(--border-color-strong); margin: 2rem 0;">
             <h2>Why I started IBK Blogs</h2>
             <p>
               IBK Blogs is where that belief turns into action. It’s my space to share how AI can actually fit into 
@@ -180,7 +149,7 @@
                   <!-- the toggle button -->
                   <button class="ti-toggle"
                           aria-expanded="false"
-                          aria-controls="ti-extra-1">
+                          aria-controls="ti-extra-kpmg">
                     Read more
                   </button>
                 </div>
@@ -188,7 +157,7 @@
                 <p>Designing strategies that combine data, cloud, and AI to drive business impact.</p>
 
                 <!-- hidden, animated content -->
-                <div id="ti-extra-1" class="ti-extra">
+                <div id="ti-extra-kpmg" class="ti-extra">
                   <p>What that looks like in practice:</p>
                   <ul>
                     <li>Built data products that turn siloed datasets into decision-ready insights.</li>
@@ -207,7 +176,7 @@
                   <!-- the toggle button -->
                   <button class="ti-toggle"
                           aria-expanded="false"
-                          aria-controls="ti-extra-1">
+                          aria-controls="ti-extra-lewagon">
                     Read more
                   </button>
                 </div>
@@ -215,7 +184,7 @@
                 <p>Successfully completed a rigorous 6-month program focused on the most sought-after skills in data science and artificial intelligence.</p>
 
                 <!-- hidden, animated content -->
-                <div id="ti-extra-1" class="ti-extra">
+                <div id="ti-extra-lewagon" class="ti-extra">
                   <p>Acquired robust expertise in:</p>
                   <ul>
                     <li>Data Analysis & Visualization: Leveraged tools such as Python, SQL, and Tableau to derive actionable insights from complex datasets.</li>
@@ -236,7 +205,7 @@
                   <!-- the toggle button -->
                   <button class="ti-toggle"
                           aria-expanded="false"
-                          aria-controls="ti-extra-1">
+                          aria-controls="ti-extra-erasmus">
                     Read more
                   </button>
                 </div>
@@ -244,7 +213,7 @@
                 <p>Studied at <strong>Auckland University of Technology</strong> and graduated <em>magna cum laude</em>. </p>
 
                 <!-- hidden, animated content -->
-                <div id="ti-extra-1" class="ti-extra">
+                <div id="ti-extra-erasmus" class="ti-extra">
                   <p>My Erasmus exchange in New Zealand was one of the most eye-opening experiences of my life.  
                       Living so far from home taught me to adapt quickly, stay curious, and embrace new ways of thinking.  
                       I discovered a culture that values balance, authenticity, and respect for both people and nature —  
@@ -266,7 +235,7 @@
                   <!-- the toggle button -->
                   <button class="ti-toggle"
                           aria-expanded="false"
-                          aria-controls="ti-extra-1">
+                          aria-controls="ti-extra-solvay">
                     Read more
                   </button>
                 </div>
@@ -274,7 +243,7 @@
                 <p>Msc. in Business Engineering with a specialization in Data Science and Big Data.</p>
 
                 <!-- hidden, animated content -->
-                <div id="ti-extra-1" class="ti-extra">
+                <div id="ti-extra-solvay" class="ti-extra">
                   <p>During this program, I discovered how much I enjoy turning  
                     abstract data into clear insights that drive decisions. What started as curiosity for numbers  
                     quickly became a genuine passion for analytics, technology, and the stories data can tell.
@@ -287,6 +256,46 @@
                 </div>
               </div>
 
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CERTIFICATIONS ===== -->
+      <section class="section">
+        <div class="container">
+          <div class="section-heading" style="margin-bottom: 1.5rem;">
+            <h2>Certifications</h2>
+            <p>Industry credentials that validate my hands-on experience with data and AI platforms.</p>
+          </div>
+
+          <div class="cert-grid">
+            <div class="cert-card">
+              <div class="cert-icon" style="background: transparent;">
+                <svg viewBox="0 0 36 36" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 2.1L3.6 10.4v3.2L18 5.3l14.4 8.3v-3.2L18 2.1z" fill="#FF3621"/>
+                  <path d="M18 8.5L3.6 16.8v3.2L18 11.7l14.4 8.3v-3.2L18 8.5z" fill="#FF3621"/>
+                  <path d="M18 14.9L3.6 23.2v3.2L18 34l14.4-8.3v-3.2L18 14.9z" fill="#FF3621"/>
+                </svg>
+              </div>
+              <div class="cert-info">
+                <strong>Databricks Certified Data Engineer Associate</strong>
+                <span>Databricks</span>
+              </div>
+            </div>
+
+            <div class="cert-card">
+              <div class="cert-icon" style="background: transparent;">
+                <svg viewBox="0 0 36 36" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 2.1L3.6 10.4v3.2L18 5.3l14.4 8.3v-3.2L18 2.1z" fill="#FF3621"/>
+                  <path d="M18 8.5L3.6 16.8v3.2L18 11.7l14.4 8.3v-3.2L18 8.5z" fill="#FF3621"/>
+                  <path d="M18 14.9L3.6 23.2v3.2L18 34l14.4-8.3v-3.2L18 14.9z" fill="#FF3621"/>
+                </svg>
+              </div>
+              <div class="cert-info">
+                <strong>Databricks Certified AI Engineer Associate</strong>
+                <span>Databricks</span>
+              </div>
             </div>
           </div>
         </div>
@@ -332,8 +341,9 @@
         <div class="footer-col">
           <strong>Explore</strong>
           <div class="footer-nav">
-            <a href="blog.html">Latest articles</a>
-            <a href="index.html#newsletter">Newsletter</a>
+            <a href="blog.html">Experiments</a>
+            <a href="learn.html">Learn with me</a>
+            <a href="about.html">About Ilias</a>
           </div>
         </div>
         <div class="footer-col">

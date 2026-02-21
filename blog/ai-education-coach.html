@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      (function(){var t=localStorage.getItem('ibk-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Langualift ? IBK Blogs</title>
@@ -8,24 +11,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="../assets/css/styles.css" />
     <script defer src="../assets/js/main.js"></script>
   </head>
-  <body data-page="blog" data-assets-root="..">
+  <body data-page="experiments" data-assets-root="..">
+    <a class="skip-to-content" href="#main">Skip to content</a>
     <nav>
       <div class="container nav-inner">
         <a class="brand" href="../index.html">IBK <span>Blogs.</span></a>
-        <button class="nav-toggle" aria-label="Toggle navigation">?</button>
-        <div class="nav-links">
-          <a data-nav="home" href="../index.html">Home</a>
-          <a data-nav="blog" href="../blog.html">Blog</a>
-          <a data-nav="about" href="../about.html">About Me</a>
-          <a data-nav="contact" href="../contact.html">Contact</a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a data-nav="home" href="../index.html">Home</a>
+            <a data-nav="experiments" href="../blog.html">Experiments</a>
+            <a data-nav="learn" href="../learn.html">Learn with me</a>
+            <a data-nav="about" href="../about.html">About Me</a>
+            <a data-nav="contact" href="../contact.html">Contact</a>
+          </div>
+          <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+          <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
         </div>
       </div>
     </nav>
 
-    <main>
+    <main id="main">
       <article class="section">
         <div class="container" style="display: grid; gap: 3rem;">
           <header style="display: grid; gap: 1rem;">
@@ -80,22 +89,24 @@
           <p>Practical, human-centered AI explorations by Ilias Benkhaled.</p>
         </div>
         <div class="footer-col">
-          <strong>Keep reading</strong>
+          <strong>Explore</strong>
           <div class="footer-nav">
-            <a href="ai-for-research.html">Agentic research</a>
-            <a href="ai-prototyping-toolkit.html">Prototyping toolkit</a>
+            <a href="../blog.html">All experiments</a>
+            <a href="../learn.html">Learn with me</a>
           </div>
         </div>
         <div class="footer-col">
           <strong>Connect</strong>
           <div class="footer-nav">
-            <a href="mailto:hello@ibk.ai">hello@ibk.ai</a>
+            <a href="mailto:ilias.benkh1912@gmail.com">ilias.benkh1912@gmail.com</a>
             <a href="https://www.linkedin.com/in/ilias-benkhaled/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/Ib191" target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </div>
       </div>
       <div class="container footer-bottom">
-        <span>? <span id="year"></span> IBK Blogs.</span>
+        <span>&copy; <span id="year"></span> IBK Blogs.</span>
+        <span>Keep experimenting.</span>
       </div>
     </footer>
     <script>

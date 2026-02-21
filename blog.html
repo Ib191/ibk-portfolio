@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      (function(){var t=localStorage.getItem('ibk-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Blog - IBK Blogs</title>
+    <title>Experiments - IBK Blogs</title>
     <meta
       name="description"
       content="Browse practical AI use cases, automation recipes, and prototyping notes from Ilias Benkhaled."
@@ -14,27 +17,32 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
   </head>
 
-  <body data-page="blog" data-assets-root=".">
+  <body data-page="experiments" data-assets-root=".">
+    <a class="skip-to-content" href="#main">Skip to content</a>
     <!-- Navigation -->
     <nav>
       <div class="container nav-inner">
         <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
-        <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
-        <div class="nav-links">
-          <a data-nav="home" href="index.html">Home</a>
-          <a data-nav="blog" href="blog.html" class="active">Blog</a>
-          <a data-nav="about" href="about.html">About Me</a>
-          <a data-nav="contact" href="contact.html">Contact</a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a data-nav="home" href="index.html">Home</a>
+            <a data-nav="experiments" href="blog.html">Experiments</a>
+            <a data-nav="learn" href="learn.html">Learn with me</a>
+            <a data-nav="about" href="about.html">About Me</a>
+            <a data-nav="contact" href="contact.html">Contact</a>
+          </div>
+          <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+          <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
         </div>
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <main>
+    <main id="main">
       <section class="hero">
         <div class="container">
           <div class="section-heading">
@@ -48,11 +56,12 @@
             </p>
           </div>
 
-          <!-- Custom alert linking to LinguaLift -->
+          <!-- HIDDEN: Custom alert linking to LinguaLift
           <div class="alert">
             New here? Start with <a href="blog/lingualift.html">LinguaLift</a> — my Chrome extension
             experiment to make language learning effortless.
           </div>
+          -->
         </div>
       </section>
 
@@ -60,12 +69,21 @@
       <section class="section">
         <div class="container">
           <div class="section-heading">
-            <h2>Latest article</h2>
-            <p></p>
+            <h2>Latest articles</h2>
           </div>
 
           <div class="post-list">
-            <!-- Only one card for LinguaLift -->
+            <a class="post-card" href="blog/prompt-enhancer.html">
+              <div class="post-meta">21 Feb 2026 · 6 min read · Prompt Engineering</div>
+              <h3 class="post-title">PromptEnhancer — Turn rough prompts into high-quality AI instructions</h3>
+              <p class="post-excerpt">
+                Paste a vague prompt and get a structured, model-ready instruction in one click.
+                Includes intent analysis, role assignment, constraints, and output formatting.
+              </p>
+              <span class="post-cta">Read the story →</span>
+            </a>
+
+            <!-- HIDDEN: LinguaLift post card
             <a class="post-card" href="blog/lingualift.html">
               <div class="post-meta">7 Oct 2025 · 5 min read · Prototyping</div>
               <h3 class="post-title">LinguaLift — My Chrome workflow to boost language input</h3>
@@ -75,6 +93,7 @@
               </p>
               <span class="post-cta">Read the story →</span>
             </a>
+            -->
           </div>
         </div>
       </section>
@@ -124,12 +143,13 @@
           <strong>Explore</strong>
           <div class="footer-nav">
             <a href="index.html">Home</a>
-            <a href="about.html">About</a>
+            <a href="learn.html">Learn with me</a>
+            <a href="about.html">About Ilias</a>
           </div>
         </div>
 
         <div class="footer-col">
-          <strong>Stay updated</strong>
+          <strong>Connect</strong>
           <div class="footer-nav">
             <a href="mailto:ilias.benkh1912@gmail.com">ilias.benkh1912@gmail.com</a>
             <a

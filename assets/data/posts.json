@@ -1,5 +1,14 @@
 [
   {
+    "id": "prompt-enhancer",
+    "title": "PromptEnhancer — Turn rough prompts into high-quality AI instructions",
+    "excerpt": "Paste a vague prompt and get a structured, model-ready instruction in one click. Includes intent analysis, role assignment, and output formatting.",
+    "tags": ["Prompt Engineering", "Productivity"],
+    "publishedOn": "2026-02-21",
+    "readTime": "6 min read",
+    "link": "blog/prompt-enhancer.html"
+  },
+  {
     "id": "ai-customer-support",
     "title": "How AI Assistants Make Customer Support Scalable",
     "excerpt": "A look at AI-driven support workflows that blend chatbots with human expertise to keep response times low and satisfaction high.",

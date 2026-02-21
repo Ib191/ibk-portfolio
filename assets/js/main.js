@@ -1,91 +1,55 @@
+/* ============================================================
+   IBK Blogs — main.js
+   Navigation, dark-mode toggle, posts loader, timeline accordion
+   ============================================================ */
+
+/* ---------- Helpers ---------- */
 function getAssetsRoot() {
   const root = document.body.dataset.assetsRoot || '.';
   return root.endsWith('/') ? root.slice(0, -1) : root;
 }
 
-function formatDate(isoDate) {
-  const date = new Date(`${isoDate}T00:00:00Z`);
-  return date.toLocaleDateString(undefined, {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
+/* ---------- Dark Mode ---------- */
+function setupThemeToggle() {
+  const toggles = document.querySelectorAll('.theme-toggle');
+  if (!toggles.length) return;
+
+  // Check saved preference, default to light
+  const saved = localStorage.getItem('ibk-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+
+  applyTheme(theme);
+
+  toggles.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      localStorage.setItem('ibk-theme', next);
+    });
   });
 }
 
-async function loadPosts() {
-  const postsPath = `${getAssetsRoot()}/assets/data/posts.json`;
-  try {
-    const response = await fetch(postsPath);
-    if (!response.ok) {
-      throw new Error(`Unable to load posts: ${response.status}`);
-    }
-
-    const posts = await response.json();
-    const sorted = posts.sort((a, b) => new Date(b.publishedOn) - new Date(a.publishedOn));
-    renderFeaturedPosts(sorted.slice(0, 3));
-    renderAllPosts(sorted);
-  } catch (error) {
-    console.error(error);
-  }
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const icon = theme === 'dark' ? '☀️' : '🌙';
+  document.querySelectorAll('.theme-toggle').forEach((btn) => {
+    btn.textContent = icon;
+    btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  });
 }
 
-function renderFeaturedPosts(posts) {
-  const container = document.querySelector('[data-featured-posts]');
-  if (!container) return;
-
-  container.innerHTML = posts
-    .map(
-      (post) => `
-        <article class="card highlight">
-          <span class="card-tag">Featured ? ${formatDate(post.publishedOn)}</span>
-          <h3>${post.title}</h3>
-          <p>${post.excerpt}</p>
-          <div class="card-footer">
-            <span>${post.readTime}</span>
-            <a href="${post.link}">Read more ?</a>
-          </div>
-        </article>
-      `
-    )
-    .join('');
-}
-
-function renderAllPosts(posts) {
-  const list = document.querySelector('[data-post-list]');
-  if (!list) return;
-
-  list.innerHTML = posts
-    .map(
-      (post) => `
-        <article class="post-card">
-          <header>
-            <div class="post-meta">
-              <span>${formatDate(post.publishedOn)}</span>
-              <span>${post.readTime}</span>
-              <span>${post.tags.join(' ? ')}</span>
-            </div>
-            <h3><a href="${post.link}">${post.title}</a></h3>
-          </header>
-          <p>${post.excerpt}</p>
-          <footer>
-            <a href="${post.link}">Read the story ?</a>
-          </footer>
-        </article>
-      `
-    )
-    .join('');
-}
-
+/* ---------- Navigation ---------- */
 function setupNavigation() {
   const toggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
   const pageId = document.body.dataset.page;
 
+  // Mark active link
   if (pageId) {
     const activeLink = document.querySelector(`[data-nav="${pageId}"]`);
-    if (activeLink) {
-      activeLink.classList.add('active');
-    }
+    if (activeLink) activeLink.classList.add('active');
   }
 
   if (!toggle || !navLinks) return;
@@ -94,24 +58,28 @@ function setupNavigation() {
     navLinks.classList.toggle('open');
   });
 
+  // Close menu on link click
   navLinks.querySelectorAll('a').forEach((link) =>
     link.addEventListener('click', () => navLinks.classList.remove('open'))
   );
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-inner')) {
+      navLinks.classList.remove('open');
+    }
+  });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  setupNavigation();
-  loadPosts();
-});
+/* ---------- Posts Loader (removed — posts are now hardcoded in HTML) ---------- */
 
-
-(function () {
+/* ---------- Timeline Accordion ---------- */
+function setupTimeline() {
   const items = document.querySelectorAll('.timeline-item.is-collapsible');
 
-  items.forEach((item, idx) => {
+  items.forEach((item) => {
     const btn = item.querySelector('.ti-toggle');
     const extra = item.querySelector('.ti-extra');
-
     if (!btn || !extra) return;
 
     const close = () => {
@@ -125,23 +93,19 @@ document.addEventListener('DOMContentLoaded', () => {
       item.classList.add('open');
       btn.setAttribute('aria-expanded', 'true');
       btn.textContent = 'Show less';
-      // set to natural height for smooth animation
       extra.style.maxHeight = extra.scrollHeight + 'px';
     };
 
     btn.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      isOpen ? close() : open();
+      item.classList.contains('open') ? close() : open();
     });
 
-    // Keep height correct on resize if open
     window.addEventListener('resize', () => {
       if (item.classList.contains('open')) {
         extra.style.maxHeight = extra.scrollHeight + 'px';
       }
     });
 
-    // Optional: close with ESC when focused inside
     item.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && item.classList.contains('open')) {
         close();
@@ -149,4 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-})();
+}
+
+/* ---------- Init ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  setupThemeToggle();
+  setupNavigation();
+  setupTimeline();
+});
