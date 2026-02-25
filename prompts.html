@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      (function(){var t=localStorage.getItem('ibk-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Useful Prompts - IBK Blogs</title>
+    <meta
+      name="description"
+      content="A curated library of ready-to-use prompts grouped by topic to get better outputs from LLMs."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script defer src="assets/js/main.js"></script>
+    <style>
+      /* ---- Prompt Library ---- */
+      .prompt-filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+      .prompt-filter {
+        padding: .45rem 1rem; border-radius: var(--radius-full);
+        border: 1px solid var(--border-color-strong); background: transparent;
+        color: var(--text-secondary); font: 500 .85rem/1 'Manrope', sans-serif;
+        cursor: pointer; transition: all var(--transition-fast);
+      }
+      .prompt-filter:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+      .prompt-filter.active {
+        background: var(--accent-primary); color: #fff;
+        border-color: var(--accent-primary);
+      }
+      .prompt-grid {
+        display: grid; gap: 1.25rem;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      }
+      .prompt-card {
+        background: var(--bg-surface); border: 1px solid var(--border-color);
+        border-radius: var(--radius-md); padding: 1.5rem;
+        display: grid; gap: .75rem; transition: box-shadow var(--transition-normal);
+        position: relative;
+      }
+      .prompt-card:hover { box-shadow: var(--shadow-md); }
+      .prompt-card-head { display: flex; align-items: center; gap: .6rem; }
+      .prompt-card-icon {
+        width: 36px; height: 36px; border-radius: var(--radius-sm);
+        display: grid; place-items: center; font-size: 1.1rem;
+        background: var(--accent-bg); flex-shrink: 0;
+      }
+      .prompt-card-head h3 { font-size: .95rem; font-weight: 600; margin: 0; }
+      .prompt-card-tag {
+        font-size: .7rem; font-weight: 600; text-transform: uppercase;
+        letter-spacing: .04em; color: var(--accent-primary);
+      }
+      .prompt-card-body {
+        background: var(--bg-elevated); border-radius: var(--radius-sm);
+        padding: 1rem; font-size: .85rem; line-height: 1.6;
+        color: var(--text-primary); position: relative;
+        border: 1px dashed var(--border-color);
+      }
+      .prompt-card-use {
+        font-size: .8rem; color: var(--text-tertiary); line-height: 1.5;
+      }
+      .prompt-card-use strong { color: var(--text-secondary); font-weight: 600; }
+      .prompt-copy {
+        position: absolute; top: .5rem; right: .5rem;
+        background: var(--bg-surface); border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm); padding: .3rem .55rem;
+        font-size: .7rem; font-weight: 500; cursor: pointer;
+        color: var(--text-secondary); transition: all var(--transition-fast);
+      }
+      .prompt-copy:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+      .prompt-copy.copied { color: var(--accent-secondary); border-color: var(--accent-secondary); }
+      .prompt-count {
+        font-size: .85rem; color: var(--text-tertiary); padding-top: .25rem;
+      }
+      @media (max-width: 480px) {
+        .prompt-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+
+  <body data-page="prompts" data-assets-root=".">
+    <a class="skip-to-content" href="#main">Skip to content</a>
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a data-nav="home" href="index.html">Home</a>
+            <a data-nav="experiments" href="blog.html">Experiments</a>
+            <a data-nav="learn" href="learn.html">Learn with me</a>
+            <a data-nav="about" href="about.html">About Me</a>
+            <a data-nav="contact" href="contact.html">Contact</a>
+          </div>
+          <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+          <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+        </div>
+      </div>
+    </nav>
+
+    <main id="main">
+      <!-- Hero -->
+      <section class="hero hero--compact">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <span class="badge">Prompt library</span>
+              <h1>Useful prompts you can steal</h1>
+            </div>
+            <p>
+              Ready-to-use prompts organized by what you're trying to do.
+              Pick a category, copy the prompt, paste it into any LLM, and tweak to fit your context.
+            </p>
+          </div>
+
+          <!-- Category filters -->
+          <div class="prompt-filters" id="filters">
+            <button class="prompt-filter active" data-cat="all">All</button>
+            <button class="prompt-filter" data-cat="writing">Writing</button>
+            <button class="prompt-filter" data-cat="thinking">Thinking</button>
+            <button class="prompt-filter" data-cat="productivity">Productivity</button>
+            <button class="prompt-filter" data-cat="coding">Coding</button>
+            <button class="prompt-filter" data-cat="learning">Learning</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prompt cards -->
+      <section class="section section--compact-top">
+        <div class="container">
+          <p class="prompt-count"><span id="visible-count">12</span> prompts</p>
+          <div class="prompt-grid" id="prompt-grid">
+
+            <!-- WRITING -->
+            <div class="prompt-card" data-category="writing">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">✍️</div>
+                <div>
+                  <span class="prompt-card-tag">Writing</span>
+                  <h3>Sound more human</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                Respond like a thoughtful colleague, not an AI. Keep sentences short. Use contractions. Avoid corporate buzzwords. If something is uncertain, say so honestly. End with one helpful follow-up question.
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> Customer replies, Slack messages, emails to teammates</p>
+            </div>
+
+            <div class="prompt-card" data-category="writing">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">🎯</div>
+                <div>
+                  <span class="prompt-card-tag">Writing</span>
+                  <h3>Rewrite with a target audience</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                Rewrite this for [target audience]. Keep it under [word count]. Tone: [professional / casual / persuasive]. Include one concrete example. Remove filler words and jargon.
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> LinkedIn posts, marketing copy, documentation</p>
+            </div>
+
+            <div class="prompt-card" data-category="writing">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">📧</div>
+                <div>
+                  <span class="prompt-card-tag">Writing</span>
+                  <h3>Draft a professional email</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                Write a concise email about [topic]. Context: [situation]. Tone: polite but direct. Structure: one short opener, the key point in 2-3 sentences, a clear ask or next step. Keep it under 120 words.
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> Client updates, internal requests, follow-ups</p>
+            </div>
+
+            <!-- THINKING -->
+            <div class="prompt-card" data-category="thinking">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">🧠</div>
+                <div>
+                  <span class="prompt-card-tag">Thinking</span>
+                  <h3>Step-by-step reasoning</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                Think through this step by step. First list your assumptions. Then explain your reasoning in 5 numbered points. End with a one-paragraph conclusion and state your confidence level (high / medium / low).
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> Strategy decisions, analysis, tradeoff evaluation</p>
+            </div>
+
+            <div class="prompt-card" data-category="thinking">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">⚖️</div>
+                <div>
+                  <span class="prompt-card-tag">Thinking</span>
+                  <h3>Pros and cons analysis</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                Analyze [decision/option] by listing 4 pros and 4 cons. For each, add a one-sentence explanation. Then give a recommendation with the most important factor highlighted. Be balanced — don't default to "it depends."
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> Tool selection, career decisions, project planning</p>
+            </div>
+
+            <!-- PRODUCTIVITY -->
+            <div class="prompt-card" data-category="productivity">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">📋</div>
+                <div>
+                  <span class="prompt-card-tag">Productivity</span>
+                  <h3>Summarize anything fast</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                Summarize this in 5 bullet points. Each bullet = one sentence max. Then add a "So what?" section with 2 key implications or action items. Skip the intro — go straight to the bullets.
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> Meeting notes, long emails, reports, research papers</p>
+            </div>
+
+            <div class="prompt-card" data-category="productivity">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">📅</div>
+                <div>
+                  <span class="prompt-card-tag">Productivity</span>
+                  <h3>Turn notes into action items</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                Here are my raw meeting notes: [paste notes]. Extract: (1) decisions made, (2) action items with owner and deadline if mentioned, (3) open questions. Format as a clean list I can share with the team.
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> Post-meeting follow-ups, standup summaries</p>
+            </div>
+
+            <div class="prompt-card" data-category="productivity">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">🔍</div>
+                <div>
+                  <span class="prompt-card-tag">Productivity</span>
+                  <h3>Quick research brief</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                Give me a 2-minute briefing on [topic]. Cover: what it is (1 sentence), why it matters now, 3 key things to know, and one thing most people get wrong. Write for someone smart but unfamiliar with the topic.
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> Preparing for meetings, exploring new domains</p>
+            </div>
+
+            <!-- CODING -->
+            <div class="prompt-card" data-category="coding">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">💻</div>
+                <div>
+                  <span class="prompt-card-tag">Coding</span>
+                  <h3>Explain code like a mentor</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                Explain this code to me like I'm a junior developer. Walk through it line by line. Highlight any tricky parts, potential bugs, or things I should know. Then suggest one improvement.
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> Code review, learning new codebases, debugging</p>
+            </div>
+
+            <div class="prompt-card" data-category="coding">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">🐛</div>
+                <div>
+                  <span class="prompt-card-tag">Coding</span>
+                  <h3>Debug this error</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                I'm getting this error: [paste error]. Here's the relevant code: [paste code]. Explain what's causing it, give me the fix, and tell me how to prevent it next time. Keep it concise.
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> Stack traces, runtime errors, config issues</p>
+            </div>
+
+            <!-- LEARNING -->
+            <div class="prompt-card" data-category="learning">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">📚</div>
+                <div>
+                  <span class="prompt-card-tag">Learning</span>
+                  <h3>Explain like I'm a beginner</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                Explain [concept] in simple terms. Use an everyday analogy. Then give one concrete example. Finally, tell me the one thing most beginners misunderstand about it. No jargon — pretend I'm 15.
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> New topics, prep for interviews, teaching others</p>
+            </div>
+
+            <div class="prompt-card" data-category="learning">
+              <div class="prompt-card-head">
+                <div class="prompt-card-icon">🗺️</div>
+                <div>
+                  <span class="prompt-card-tag">Learning</span>
+                  <h3>Build a learning roadmap</h3>
+                </div>
+              </div>
+              <div class="prompt-card-body">
+                <button class="prompt-copy" aria-label="Copy prompt">Copy</button>
+                I want to learn [skill/topic] from scratch. Create a 4-week learning plan. For each week: one clear goal, 2-3 resources (free if possible), and one mini-project to practice. Assume I can spend 5 hours per week.
+              </div>
+              <p class="prompt-card-use"><strong>Best for:</strong> Self-study plans, career pivots, skill-building</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section">
+        <div class="container" style="text-align: center; max-width: 640px;">
+          <h2>Have a prompt that works great?</h2>
+          <p>
+            Share your best prompts or suggest a new category.
+            I'll add the best ones to the library.
+          </p>
+          <div class="hero-cta" style="justify-content: center; margin-top: 1.5rem;">
+            <a class="btn btn-primary" href="contact.html">Share a prompt</a>
+            <a class="btn btn-secondary" href="learn.html">Back to Learn</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Prompt page scripts -->
+    <script>
+      // Category filtering
+      const filters = document.querySelectorAll('.prompt-filter');
+      const cards = document.querySelectorAll('.prompt-card');
+      const countEl = document.getElementById('visible-count');
+
+      function filterCards(cat) {
+        let visible = 0;
+        cards.forEach(card => {
+          const show = cat === 'all' || card.dataset.category === cat;
+          card.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        countEl.textContent = visible;
+        filters.forEach(f => f.classList.toggle('active', f.dataset.cat === cat));
+      }
+
+      filters.forEach(btn => btn.addEventListener('click', () => filterCards(btn.dataset.cat)));
+
+      // Copy to clipboard
+      document.querySelectorAll('.prompt-copy').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const text = btn.parentElement.textContent.replace('Copy', '').trim();
+          navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+          });
+        });
+      });
+    </script>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-col">
+          <a class="brand" href="index.html">IBK <span>Blogs.</span></a>
+          <p>Practical, human-centered AI explorations by Ilias Benkhaled.</p>
+        </div>
+        <div class="footer-col">
+          <strong>Explore</strong>
+          <div class="footer-nav">
+            <a href="blog.html">Experiments</a>
+            <a href="learn.html">Learn with me</a>
+            <a href="about.html">About Ilias</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <strong>Connect</strong>
+          <div class="footer-nav">
+            <a href="mailto:ilias.benkh1912@gmail.com">ilias.benkh1912@gmail.com</a>
+            <a href="https://www.linkedin.com/in/ilias-benkhaled/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/Ib191" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>&copy; <span id="year"></span> IBK Blogs. Crafted by Ilias Benkhaled.</span>
+        <span>Keep learning, keep building.</span>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelectorAll('#year').forEach((n) => (n.textContent = new Date().getFullYear()));
+    </script>
+  </body>
+</html>

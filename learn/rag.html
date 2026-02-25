@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      (function(){var t=localStorage.getItem('ibk-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What is RAG? — Learn with me | IBK Blogs</title>
+    <meta
+      name="description"
+      content="A simple, visual explanation of Retrieval-Augmented Generation (RAG) — how it works, why it matters, and when to use it."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <script defer src="../assets/js/main.js"></script>
+    <style>
+      /* ---- RAG page styles ---- */
+
+      /* Vertical pipeline */
+      .pipeline { display: grid; gap: 0; padding: 1rem 0; }
+
+      .pipe-step {
+        display: grid; grid-template-columns: 56px 1fr; gap: 0;
+        position: relative;
+      }
+
+      /* Left rail: number + connector line */
+      .pipe-rail {
+        display: flex; flex-direction: column; align-items: center;
+      }
+      .pipe-num {
+        width: 44px; height: 44px; border-radius: 50%;
+        display: grid; place-items: center;
+        font-weight: 700; font-size: .9rem; color: #fff;
+        background: var(--accent-primary); flex-shrink: 0;
+        position: relative; z-index: 1;
+      }
+      .pipe-step:nth-child(5) .pipe-num { background: var(--accent-secondary); }
+      .pipe-line {
+        width: 2px; flex: 1; background: var(--border-color-strong);
+      }
+      .pipe-step:last-child .pipe-line { display: none; }
+
+      /* Right: card */
+      .pipe-card {
+        background: var(--bg-surface); border: 1px solid var(--border-color);
+        border-radius: var(--radius-md); margin: 0 0 1.25rem .75rem;
+        overflow: hidden; transition: box-shadow var(--transition-normal);
+      }
+      .pipe-card:hover { box-shadow: var(--shadow-md); }
+
+      .pipe-card-head {
+        padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: .85rem;
+      }
+      .pipe-card-icon { font-size: 1.6rem; flex-shrink: 0; }
+      .pipe-card-text { flex: 1; }
+      .pipe-card-text h3 { margin: 0; font-size: 1rem; line-height: 1.3; }
+      .pipe-card-text p {
+        margin: .25rem 0 0; font-size: .85rem; color: var(--text-tertiary); line-height: 1.5;
+      }
+
+      /* Expandable "Under the hood" */
+      .pipe-toggle {
+        display: flex; align-items: center; gap: .5rem;
+        width: 100%; padding: .7rem 1.5rem;
+        background: var(--bg-elevated); border: none; border-top: 1px solid var(--border-color);
+        cursor: pointer; font: 600 .78rem/1 'Manrope', sans-serif;
+        color: var(--accent-primary); text-align: left;
+        transition: background var(--transition-fast);
+      }
+      .pipe-toggle:hover { background: var(--accent-bg); }
+      .pipe-toggle .chevron {
+        display: inline-block; transition: transform .25s ease;
+        font-size: .7rem;
+      }
+      .pipe-toggle[aria-expanded="true"] .chevron { transform: rotate(90deg); }
+
+      .pipe-details {
+        max-height: 0; overflow: hidden;
+        transition: max-height .35s ease, padding .35s ease;
+        padding: 0 1.5rem;
+        background: var(--bg-elevated);
+      }
+      .pipe-details.open {
+        max-height: 600px; padding: 1rem 1.5rem 1.25rem;
+      }
+      .pipe-details p {
+        margin: 0 0 .6rem; font-size: .85rem; color: var(--text-secondary); line-height: 1.65;
+      }
+      .pipe-details p:last-child { margin-bottom: 0; }
+      .pipe-details strong { color: var(--text-primary); }
+      .pipe-details code {
+        font-size: .8rem; background: var(--bg-surface); padding: .15rem .4rem;
+        border-radius: 4px; font-family: 'Courier New', monospace;
+      }
+      .detail-example {
+        background: var(--bg-surface); border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm); padding: .85rem 1rem;
+        margin: .6rem 0; font-size: .8rem; line-height: 1.6;
+        color: var(--text-secondary);
+      }
+      .detail-example strong { color: var(--text-primary); }
+
+      @media (max-width: 500px) {
+        .pipe-step { grid-template-columns: 40px 1fr; }
+        .pipe-num { width: 34px; height: 34px; font-size: .75rem; }
+        .pipe-card-head { padding: 1rem; }
+        .pipe-toggle { padding: .6rem 1rem; }
+        .pipe-details.open { padding: .85rem 1rem 1rem; }
+      }
+
+      /* Comparison cards */
+      .compare-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+      }
+      .compare-card {
+        background: var(--bg-surface); border: 1px solid var(--border-color);
+        border-radius: var(--radius-md); padding: 1.5rem;
+        display: grid; gap: .75rem;
+      }
+      .compare-card h3 { margin: 0; font-size: 1rem; display: flex; align-items: center; gap: .5rem; }
+      .compare-card p { color: var(--text-secondary); font-size: .9rem; line-height: 1.6; margin: 0; }
+      .compare-card.good { border-left: 3px solid var(--accent-secondary); }
+      .compare-card.bad { border-left: 3px solid #e74c3c; }
+      @media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+
+      /* Analogy box */
+      .analogy-box {
+        background: var(--accent-bg); border: 1px solid var(--accent-primary);
+        border-radius: var(--radius-md); padding: 2rem;
+        display: grid; grid-template-columns: auto 1fr; gap: 1.25rem;
+        align-items: start;
+      }
+      .analogy-icon { font-size: 2.5rem; }
+      .analogy-box h3 { margin: 0 0 .5rem; font-size: 1.1rem; }
+      .analogy-box p { color: var(--text-secondary); font-size: .9rem; line-height: 1.7; margin: 0; }
+      @media (max-width: 500px) {
+        .analogy-box { grid-template-columns: 1fr; text-align: center; }
+      }
+
+      /* Use-case pills */
+      .usecase-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem;
+      }
+      .usecase-item {
+        background: var(--bg-surface); border: 1px solid var(--border-color);
+        border-radius: var(--radius-md); padding: 1.25rem;
+        display: flex; gap: .75rem; align-items: start;
+        transition: box-shadow var(--transition-normal);
+      }
+      .usecase-item:hover { box-shadow: var(--shadow-md); }
+      .usecase-icon { font-size: 1.5rem; flex-shrink: 0; padding-top: .1rem; }
+      .usecase-item h4 { margin: 0 0 .25rem; font-size: .9rem; }
+      .usecase-item p { margin: 0; font-size: .8rem; color: var(--text-tertiary); line-height: 1.5; }
+
+      /* Quiz styles */
+      .quiz {
+        background: var(--bg-surface); border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg); padding: 2rem; display: grid; gap: 1.5rem;
+      }
+      .quiz-header {
+        display: flex; align-items: center; gap: .75rem; font-size: 1.1rem; font-weight: 600;
+      }
+      .quiz-header span { font-size: 1.5rem; }
+      .quiz-progress {
+        height: 6px; background: var(--bg-elevated); border-radius: var(--radius-full);
+        overflow: hidden;
+      }
+      .quiz-progress-bar {
+        height: 100%; background: var(--accent-primary); border-radius: var(--radius-full);
+        transition: width 0.4s ease; width: 0%;
+      }
+      .quiz-question { font-size: 1rem; font-weight: 600; line-height: 1.5; }
+      .quiz-options { display: grid; gap: .6rem; }
+      .quiz-option {
+        background: var(--bg-elevated); border: 2px solid var(--border-color);
+        border-radius: var(--radius-sm); padding: .85rem 1.1rem;
+        cursor: pointer; font-size: .9rem; line-height: 1.4;
+        transition: all var(--transition-fast); text-align: left;
+        color: var(--text-primary); font-family: inherit;
+        width: 100%; display: block;
+      }
+      .quiz-option:hover { border-color: var(--accent-primary); background: var(--accent-bg); }
+      .quiz-option.correct {
+        border-color: var(--accent-secondary); background: var(--accent-bg-secondary);
+        color: var(--accent-secondary-hover);
+      }
+      .quiz-option.wrong {
+        border-color: #e74c3c; background: rgba(231, 76, 60, .07);
+        color: #c0392b;
+      }
+      .quiz-option.disabled { pointer-events: none; opacity: .6; }
+      .quiz-feedback {
+        font-size: .85rem; line-height: 1.6; padding: .75rem 1rem;
+        border-radius: var(--radius-sm); display: none;
+      }
+      .quiz-feedback.show { display: block; }
+      .quiz-feedback.correct-fb { background: var(--accent-bg-secondary); color: var(--accent-secondary-hover); }
+      .quiz-feedback.wrong-fb { background: rgba(231, 76, 60, .07); color: #c0392b; }
+      .quiz-nav { display: flex; justify-content: flex-end; gap: .75rem; }
+      .quiz-nav button {
+        padding: .6rem 1.4rem; border-radius: var(--radius-full);
+        font: 600 .85rem/1 'Manrope', sans-serif; cursor: pointer;
+        border: none; transition: all var(--transition-fast);
+      }
+      .quiz-next {
+        background: var(--accent-primary); color: #fff; display: none;
+      }
+      .quiz-next:hover { background: var(--accent-primary-hover); }
+      .quiz-next.show { display: inline-block; }
+      .quiz-result {
+        text-align: center; display: grid; gap: .75rem;
+      }
+      .quiz-result .score { font-size: 2rem; font-weight: 700; color: var(--accent-primary); }
+      .quiz-result p { color: var(--text-secondary); font-size: .9rem; }
+      .quiz-restart {
+        background: var(--accent-primary); color: #fff; border: none;
+        padding: .6rem 1.4rem; border-radius: var(--radius-full);
+        font: 600 .85rem/1 'Manrope', sans-serif; cursor: pointer;
+        justify-self: center;
+      }
+      .quiz-restart:hover { background: var(--accent-primary-hover); }
+
+      /* Section reading flow */
+      .rag-content { display: grid; gap: 3rem; }
+      .rag-section { display: grid; gap: 1rem; }
+      .rag-section h2 { font-size: 1.3rem; }
+      .rag-section p { color: var(--text-secondary); font-size: .95rem; line-height: 1.7; }
+      .rag-section p strong { color: var(--text-primary); }
+    </style>
+  </head>
+
+  <body data-page="learn" data-assets-root="..">
+    <a class="skip-to-content" href="#main">Skip to content</a>
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="../index.html">IBK <span>Blogs.</span></a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a data-nav="home" href="../index.html">Home</a>
+            <a data-nav="experiments" href="../blog.html">Experiments</a>
+            <a data-nav="learn" href="../learn.html">Learn with me</a>
+            <a data-nav="about" href="../about.html">About Me</a>
+            <a data-nav="contact" href="../contact.html">Contact</a>
+          </div>
+          <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+          <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+        </div>
+      </div>
+    </nav>
+
+    <main id="main">
+      <!-- Hero -->
+      <section class="hero hero--compact">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <span class="badge">Learn with me · AI Concepts</span>
+              <h1>What is RAG?</h1>
+            </div>
+            <p>
+              A simple explanation of Retrieval-Augmented Generation — the technique
+              that gives AI access to your own data, so it stops making things up.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content -->
+      <section class="section section--compact-top">
+        <div class="container">
+          <div class="rag-content">
+
+            <!-- The analogy -->
+            <div class="rag-section">
+              <div class="analogy-box">
+                <div class="analogy-icon">📖</div>
+                <div>
+                  <h3>Think of it like an open-book exam</h3>
+                  <p>
+                    Imagine you're taking an exam. In a <strong>closed-book exam</strong>,
+                    you rely only on what you memorized — sometimes you're right, sometimes
+                    you confidently write something wrong. That's how a regular LLM works:
+                    it only knows what it learned during training.
+                  </p>
+                  <p style="margin-top: .75rem;">
+                    Now imagine an <strong>open-book exam</strong>. Before answering, you
+                    quickly flip to the right page in your textbook, read the relevant
+                    paragraph, and then write your answer. That's RAG — it lets the AI
+                    look things up before answering, so the response is grounded in real,
+                    up-to-date information.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- What is RAG -->
+            <div class="rag-section">
+              <h2>So what exactly is RAG?</h2>
+              <p>
+                <strong>RAG</strong> stands for <strong>Retrieval-Augmented Generation</strong>.
+                It's a technique that combines two things:
+              </p>
+              <p>
+                <strong>1. Retrieval</strong> — Before the AI generates an answer, it first
+                searches through a knowledge base (your documents, a database, a website) to
+                find the most relevant pieces of information.
+              </p>
+              <p>
+                <strong>2. Generation</strong> — The AI then uses those retrieved pieces as
+                context to write a response that's actually grounded in your data — not just
+                its training memory.
+              </p>
+              <p>
+                The magic is in the combination: the AI still writes fluently like a language
+                model, but now it has <strong>receipts</strong> — real sources to back up what it says.
+              </p>
+            </div>
+
+            <!-- Visual pipeline -->
+            <div class="rag-section">
+              <h2>How it works — step by step</h2>
+              <p>Click <strong>"Under the hood"</strong> on any step to see what's really happening behind the scenes.</p>
+
+              <div class="pipeline">
+
+                <!-- Step 1 -->
+                <div class="pipe-step">
+                  <div class="pipe-rail"><div class="pipe-num">1</div><div class="pipe-line"></div></div>
+                  <div class="pipe-card">
+                    <div class="pipe-card-head">
+                      <span class="pipe-card-icon">💬</span>
+                      <div class="pipe-card-text">
+                        <h3>You ask a question</h3>
+                        <p>"What's our refund policy for digital products?"</p>
+                      </div>
+                    </div>
+                    <button class="pipe-toggle" aria-expanded="false" onclick="toggleHood(this)">
+                      <span class="chevron">▶</span> Under the hood
+                    </button>
+                    <div class="pipe-details">
+                      <p>Your question is first turned into an <strong>embedding</strong> — a list of numbers (a vector) that captures the <em>meaning</em> of what you asked, not just the exact words.</p>
+                      <p>Think of it like translating your sentence into coordinates on a map of meaning. Questions about similar topics end up close together on this map, even if the words are completely different.</p>
+                      <div class="detail-example">
+                        <strong>Example:</strong> "refund policy" and "money-back guarantee" are far apart as text, but their embeddings are almost identical — because they <em>mean</em> the same thing.
+                      </div>
+                      <p>This embedding is generated by a specialized model (like OpenAI's <code>text-embedding-3-small</code> or open-source alternatives like <code>all-MiniLM-L6</code>). It typically produces a vector of 384–1536 numbers.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="pipe-step">
+                  <div class="pipe-rail"><div class="pipe-num">2</div><div class="pipe-line"></div></div>
+                  <div class="pipe-card">
+                    <div class="pipe-card-head">
+                      <span class="pipe-card-icon">🔍</span>
+                      <div class="pipe-card-text">
+                        <h3>Retriever searches your knowledge base</h3>
+                        <p>Finds the 3–5 most relevant chunks from your documents</p>
+                      </div>
+                    </div>
+                    <button class="pipe-toggle" aria-expanded="false" onclick="toggleHood(this)">
+                      <span class="chevron">▶</span> Under the hood
+                    </button>
+                    <div class="pipe-details">
+                      <p>This is where <strong>vector search</strong> happens. Your documents were already split into small chunks (paragraphs or sections) and each chunk was turned into an embedding — stored in a <strong>vector database</strong> like Pinecone, Weaviate, Chroma, or pgvector.</p>
+                      <p>Now the system compares your question's embedding to every chunk's embedding using <strong>cosine similarity</strong> — essentially measuring how "close" two vectors point in the same direction.</p>
+                      <div class="detail-example">
+                        <strong>Analogy:</strong> Imagine a library where every book has a GPS coordinate based on its topic. Instead of searching by title, you say "find books near coordinate X" — and instantly get the most relevant ones, even if they use different words.
+                      </div>
+                      <p>The top-k results (usually 3–5 chunks) are returned, ranked by relevance. This is sometimes called <strong>semantic search</strong> because it matches by meaning, not keywords.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="pipe-step">
+                  <div class="pipe-rail"><div class="pipe-num">3</div><div class="pipe-line"></div></div>
+                  <div class="pipe-card">
+                    <div class="pipe-card-head">
+                      <span class="pipe-card-icon">📄</span>
+                      <div class="pipe-card-text">
+                        <h3>Context is assembled into a prompt</h3>
+                        <p>Retrieved text is combined with your question and instructions</p>
+                      </div>
+                    </div>
+                    <button class="pipe-toggle" aria-expanded="false" onclick="toggleHood(this)">
+                      <span class="chevron">▶</span> Under the hood
+                    </button>
+                    <div class="pipe-details">
+                      <p>The system builds a <strong>prompt</strong> that looks something like this:</p>
+                      <div class="detail-example">
+                        <strong>System:</strong> Answer the user's question using ONLY the context below. If the answer isn't in the context, say you don't know.<br><br>
+                        <strong>Context:</strong><br>
+                        [Chunk 1] "Refund requests must be submitted within 30 days of purchase..."<br>
+                        [Chunk 2] "Digital products (e-books, courses) are non-refundable..."<br>
+                        [Chunk 3] "To request a refund, email support@company.com..."<br><br>
+                        <strong>User:</strong> What's your refund policy for digital products?
+                      </div>
+                      <p>This is called <strong>prompt augmentation</strong> — the "A" in RAG. The retrieved chunks give the LLM a focused "cheat sheet" so it doesn't have to rely on its training data. The system prompt also tells it to stay grounded in what it was given.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="pipe-step">
+                  <div class="pipe-rail"><div class="pipe-num">4</div><div class="pipe-line"></div></div>
+                  <div class="pipe-card">
+                    <div class="pipe-card-head">
+                      <span class="pipe-card-icon">🤖</span>
+                      <div class="pipe-card-text">
+                        <h3>The LLM generates an answer</h3>
+                        <p>Reads the context and writes a coherent, grounded response</p>
+                      </div>
+                    </div>
+                    <button class="pipe-toggle" aria-expanded="false" onclick="toggleHood(this)">
+                      <span class="chevron">▶</span> Under the hood
+                    </button>
+                    <div class="pipe-details">
+                      <p>The language model (GPT-4, Claude, Gemini, Llama, etc.) processes the full prompt — your question + the retrieved context + the system instructions — and generates a response token by token.</p>
+                      <p>Because the relevant information is right there in the prompt, the model is far less likely to <strong>hallucinate</strong>. It's essentially doing reading comprehension rather than recall from memory.</p>
+                      <div class="detail-example">
+                        <strong>Key insight:</strong> The LLM itself doesn't "know" it's part of a RAG pipeline. It just sees a well-structured prompt with relevant context. The magic is in what you feed it, not in a special mode.
+                      </div>
+                      <p>Some advanced setups also ask the LLM to <strong>cite its sources</strong> — e.g., "[Source: Refund Policy, Section 3.2]" — so users can verify the answer.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="pipe-step">
+                  <div class="pipe-rail"><div class="pipe-num">5</div><div class="pipe-line"></div></div>
+                  <div class="pipe-card">
+                    <div class="pipe-card-head">
+                      <span class="pipe-card-icon">✅</span>
+                      <div class="pipe-card-text">
+                        <h3>You get an accurate, sourced answer</h3>
+                        <p>Grounded in your actual data — not a guess</p>
+                      </div>
+                    </div>
+                    <button class="pipe-toggle" aria-expanded="false" onclick="toggleHood(this)">
+                      <span class="chevron">▶</span> Under the hood
+                    </button>
+                    <div class="pipe-details">
+                      <p>The final response is delivered to the user, often with <strong>source references</strong> so they can click through and verify. In production systems, this step can also include:</p>
+                      <p>• <strong>Guardrails:</strong> Checking the answer doesn't contain harmful or off-topic content.</p>
+                      <p>• <strong>Confidence scoring:</strong> Flagging low-confidence answers for human review.</p>
+                      <p>• <strong>Feedback loops:</strong> Tracking which answers users found helpful to improve retrieval over time.</p>
+                      <div class="detail-example">
+                        <strong>Result:</strong> "Digital products are non-refundable according to our policy. For physical items, refunds can be requested within 30 days by emailing support@company.com. <em>[Source: Refund Policy, updated Jan 2026]</em>"
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Why it matters — comparison -->
+            <div class="rag-section">
+              <h2>Why does this matter?</h2>
+              <p>
+                Regular LLMs have a big problem: they can <strong>hallucinate</strong> — 
+                confidently make up facts that sound true but aren't. RAG dramatically
+                reduces this by anchoring every answer in real documents.
+              </p>
+
+              <div class="compare-grid">
+                <div class="compare-card bad">
+                  <h3>❌ Without RAG</h3>
+                  <p>
+                    "Your company offers a 60-day money-back guarantee on all products."
+                  </p>
+                  <p style="font-size: .8rem; color: var(--text-tertiary);">
+                    Sounds confident but made up — your actual policy is 30 days, digital products excluded.
+                  </p>
+                </div>
+                <div class="compare-card good">
+                  <h3>✅ With RAG</h3>
+                  <p>
+                    "According to your refund policy (last updated Jan 2026), customers can
+                    request a full refund within 30 days of purchase. Digital products are non-refundable."
+                  </p>
+                  <p style="font-size: .8rem; color: var(--text-tertiary);">
+                    Accurate, sourced from the actual document, with the date included.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Key ingredients -->
+            <div class="rag-section">
+              <h2>The 3 key ingredients</h2>
+              <p>Every RAG system has three main building blocks:</p>
+
+              <div class="usecase-grid">
+                <div class="usecase-item">
+                  <div class="usecase-icon">📚</div>
+                  <div>
+                    <h4>Knowledge base</h4>
+                    <p>Your documents, PDFs, wikis, databases — anything the AI should know about. These get split into small chunks and stored.</p>
+                  </div>
+                </div>
+                <div class="usecase-item">
+                  <div class="usecase-icon">🧲</div>
+                  <div>
+                    <h4>Retriever</h4>
+                    <p>A search engine that finds the most relevant chunks for each question. Usually powered by embeddings (a way to compare meaning, not just keywords).</p>
+                  </div>
+                </div>
+                <div class="usecase-item">
+                  <div class="usecase-icon">🤖</div>
+                  <div>
+                    <h4>Generator (LLM)</h4>
+                    <p>The language model (like GPT, Claude, or Gemini) that reads the retrieved context and writes a coherent, natural answer.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- When to use RAG -->
+            <div class="rag-section">
+              <h2>When should you use RAG?</h2>
+              <p>RAG is especially useful when:</p>
+
+              <div class="usecase-grid">
+                <div class="usecase-item">
+                  <div class="usecase-icon">🏢</div>
+                  <div>
+                    <h4>Internal knowledge</h4>
+                    <p>You want AI to answer questions about your company's docs, policies, or data.</p>
+                  </div>
+                </div>
+                <div class="usecase-item">
+                  <div class="usecase-icon">📅</div>
+                  <div>
+                    <h4>Up-to-date info</h4>
+                    <p>The information changes often and the LLM's training data is outdated.</p>
+                  </div>
+                </div>
+                <div class="usecase-item">
+                  <div class="usecase-icon">🎯</div>
+                  <div>
+                    <h4>Accuracy matters</h4>
+                    <p>You can't afford hallucinations — medical, legal, financial, or customer-facing use cases.</p>
+                  </div>
+                </div>
+                <div class="usecase-item">
+                  <div class="usecase-icon">💰</div>
+                  <div>
+                    <h4>Cost-effective</h4>
+                    <p>Fine-tuning a model is expensive. RAG lets you add knowledge without retraining.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick recap -->
+            <div class="rag-section">
+              <div class="analogy-box" style="border-color: var(--accent-secondary); background: var(--accent-bg-secondary);">
+                <div class="analogy-icon">💡</div>
+                <div>
+                  <h3>Quick recap</h3>
+                  <p>
+                    <strong>RAG = Search first, then answer.</strong> Instead of relying on memory alone,
+                    the AI looks up relevant information from your data before generating a response.
+                    It reduces hallucinations, keeps answers current, and works with any knowledge base
+                    you give it. Think of it as giving your AI a reference library instead of asking it
+                    to guess.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="rag-section">
+              <h2>Test your understanding</h2>
+              <p>Five quick questions to check what you've learned. No pressure — you can retry anytime.</p>
+
+              <div class="quiz" id="quiz">
+                <div class="quiz-header">
+                  <span>🧪</span>
+                  <span>RAG Quiz</span>
+                  <span style="margin-left: auto; font-size: .8rem; font-weight: 400; color: var(--text-tertiary);" id="quiz-counter">Question 1 / 5</span>
+                </div>
+                <div class="quiz-progress">
+                  <div class="quiz-progress-bar" id="quiz-bar"></div>
+                </div>
+                <div id="quiz-body">
+                  <div class="quiz-question" id="quiz-q"></div>
+                  <div class="quiz-options" id="quiz-opts"></div>
+                  <div class="quiz-feedback" id="quiz-fb"></div>
+                  <div class="quiz-nav">
+                    <button class="quiz-next" id="quiz-next">Next →</button>
+                  </div>
+                </div>
+                <div class="quiz-result" id="quiz-result" style="display:none;">
+                  <div class="score" id="quiz-score"></div>
+                  <p id="quiz-msg"></p>
+                  <button class="quiz-restart" id="quiz-restart">Try again</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section">
+        <div class="container" style="text-align: center; max-width: 640px;">
+          <h2>Keep exploring</h2>
+          <p style="color: var(--text-secondary);">
+            Now that you understand RAG, see how prompts can improve your day-to-day AI usage.
+          </p>
+          <div class="hero-cta" style="justify-content: center; margin-top: 1.5rem;">
+            <a class="btn btn-primary" href="../prompts.html">Browse the prompt library</a>
+            <a class="btn btn-secondary" href="../learn.html">Back to Learn</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-col">
+          <a class="brand" href="../index.html">IBK <span>Blogs.</span></a>
+          <p>Practical, human-centered AI explorations by Ilias Benkhaled.</p>
+        </div>
+        <div class="footer-col">
+          <strong>Explore</strong>
+          <div class="footer-nav">
+            <a href="../blog.html">Experiments</a>
+            <a href="../learn.html">Learn with me</a>
+            <a href="../about.html">About Ilias</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <strong>Connect</strong>
+          <div class="footer-nav">
+            <a href="mailto:ilias.benkh1912@gmail.com">ilias.benkh1912@gmail.com</a>
+            <a href="https://www.linkedin.com/in/ilias-benkhaled/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/Ib191" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>&copy; <span id="year"></span> IBK Blogs. Crafted by Ilias Benkhaled.</span>
+        <span>Keep learning, keep building.</span>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelectorAll('#year').forEach((n) => (n.textContent = new Date().getFullYear()));
+    </script>
+
+    <!-- Pipeline toggle logic -->
+    <script>
+      function toggleHood(btn) {
+        var details = btn.nextElementSibling;
+        var isOpen = details.classList.contains('open');
+        details.classList.toggle('open');
+        btn.setAttribute('aria-expanded', !isOpen);
+      }
+    </script>
+
+    <!-- Quiz logic -->
+    <script>
+      (function() {
+        const questions = [
+          {
+            q: "What does RAG stand for?",
+            opts: [
+              "Real-time AI Generation",
+              "Retrieval-Augmented Generation",
+              "Rapid Automated Grounding",
+              "Response Analysis Gateway"
+            ],
+            answer: 1,
+            correct: "That's right! RAG stands for Retrieval-Augmented Generation — the AI retrieves information first, then generates an answer.",
+            wrong: "Not quite. RAG stands for Retrieval-Augmented Generation — retrieve first, then generate."
+          },
+          {
+            q: "In the open-book exam analogy, what does \"flipping to the right page\" represent?",
+            opts: [
+              "The LLM generating an answer",
+              "Fine-tuning the model",
+              "The retrieval step — searching your knowledge base",
+              "Training the model on new data"
+            ],
+            answer: 2,
+            correct: "Exactly! Flipping to the right page is the retrieval step — finding the relevant information before answering.",
+            wrong: "Not quite. Flipping to the right page represents the retrieval step — searching your knowledge base for relevant info."
+          },
+          {
+            q: "What is the main problem that RAG helps solve?",
+            opts: [
+              "AI being too slow",
+              "AI hallucinating — making up facts confidently",
+              "AI not understanding any language",
+              "AI requiring too much memory"
+            ],
+            answer: 1,
+            correct: "Spot on! RAG reduces hallucinations by grounding answers in real documents instead of relying on memory alone.",
+            wrong: "The main problem RAG solves is hallucination — when AI confidently generates information that isn't true."
+          },
+          {
+            q: "Which of these is NOT one of the 3 key ingredients of a RAG system?",
+            opts: [
+              "Knowledge base",
+              "Retriever",
+              "Fine-tuning pipeline",
+              "Generator (LLM)"
+            ],
+            answer: 2,
+            correct: "Correct! The three ingredients are: Knowledge base, Retriever, and Generator. Fine-tuning is a different technique entirely.",
+            wrong: "A fine-tuning pipeline is not part of RAG. The three ingredients are: Knowledge base, Retriever, and Generator (LLM)."
+          },
+          {
+            q: "When is RAG especially useful?",
+            opts: [
+              "When you only need creative fiction writing",
+              "When accuracy matters and information changes often",
+              "When you have no documents at all",
+              "When you want the AI to ignore external data"
+            ],
+            answer: 1,
+            correct: "Yes! RAG shines when accuracy matters and your knowledge changes over time — think internal docs, policies, or customer support.",
+            wrong: "RAG is most useful when accuracy matters and information changes often — it keeps answers grounded and current."
+          }
+        ];
+
+        let current = 0, score = 0, answered = false;
+        const qEl = document.getElementById('quiz-q');
+        const optsEl = document.getElementById('quiz-opts');
+        const fbEl = document.getElementById('quiz-fb');
+        const nextBtn = document.getElementById('quiz-next');
+        const bar = document.getElementById('quiz-bar');
+        const counter = document.getElementById('quiz-counter');
+        const bodyEl = document.getElementById('quiz-body');
+        const resultEl = document.getElementById('quiz-result');
+        const scoreEl = document.getElementById('quiz-score');
+        const msgEl = document.getElementById('quiz-msg');
+        const restartBtn = document.getElementById('quiz-restart');
+
+        function render() {
+          answered = false;
+          const q = questions[current];
+          counter.textContent = 'Question ' + (current + 1) + ' / ' + questions.length;
+          bar.style.width = ((current) / questions.length * 100) + '%';
+          qEl.textContent = q.q;
+          optsEl.innerHTML = '';
+          fbEl.className = 'quiz-feedback';
+          fbEl.textContent = '';
+          nextBtn.classList.remove('show');
+
+          q.opts.forEach(function(opt, i) {
+            var btn = document.createElement('button');
+            btn.className = 'quiz-option';
+            btn.textContent = opt;
+            btn.addEventListener('click', function() { choose(i); });
+            optsEl.appendChild(btn);
+          });
+        }
+
+        function choose(i) {
+          if (answered) return;
+          answered = true;
+          var q = questions[current];
+          var btns = optsEl.querySelectorAll('.quiz-option');
+
+          btns.forEach(function(b, idx) {
+            if (idx === q.answer) b.classList.add('correct');
+            else if (idx === i && i !== q.answer) b.classList.add('wrong');
+            if (idx !== i && idx !== q.answer) b.classList.add('disabled');
+          });
+
+          if (i === q.answer) {
+            score++;
+            fbEl.className = 'quiz-feedback show correct-fb';
+            fbEl.textContent = q.correct;
+          } else {
+            fbEl.className = 'quiz-feedback show wrong-fb';
+            fbEl.textContent = q.wrong;
+          }
+
+          if (current < questions.length - 1) {
+            nextBtn.classList.add('show');
+          } else {
+            setTimeout(showResult, 1200);
+          }
+        }
+
+        function showResult() {
+          bodyEl.style.display = 'none';
+          resultEl.style.display = '';
+          bar.style.width = '100%';
+          counter.textContent = 'Complete!';
+          scoreEl.textContent = score + ' / ' + questions.length;
+          if (score === questions.length) msgEl.textContent = 'Perfect score! You really understand RAG.';
+          else if (score >= 3) msgEl.textContent = 'Great job! You\'ve got a solid grasp of RAG.';
+          else msgEl.textContent = 'Good try! Re-read the sections above and give it another shot.';
+        }
+
+        nextBtn.addEventListener('click', function() {
+          current++;
+          render();
+        });
+
+        restartBtn.addEventListener('click', function() {
+          current = 0; score = 0;
+          bodyEl.style.display = '';
+          resultEl.style.display = 'none';
+          render();
+        });
+
+        render();
+      })();
+    </script>
+  </body>
+</html>

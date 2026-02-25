@@ -20,6 +20,52 @@
     <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
+    <style>
+      /* ---- Learn page ---- */
+
+      /* Featured resource — big visual card */
+      .learn-featured {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+        background: var(--bg-surface); border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg); overflow: hidden;
+        transition: box-shadow var(--transition-normal);
+      }
+      .learn-featured:hover { box-shadow: var(--shadow-lg); }
+      .learn-featured-visual {
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        display: grid; place-items: center; padding: 2.5rem; min-height: 280px;
+      }
+      .learn-featured-visual-inner {
+        display: grid; gap: .75rem; text-align: center; color: #fff;
+      }
+      .learn-featured-visual-inner .big-icon { font-size: 3rem; }
+      .learn-featured-visual-inner .stat { font-size: 2.5rem; font-weight: 700; line-height: 1; }
+      .learn-featured-visual-inner .stat-label { font-size: .85rem; opacity: .85; }
+      .learn-featured-body { padding: 2.5rem; display: grid; gap: 1rem; align-content: center; }
+      .learn-featured-body .badge { justify-self: start; }
+      .learn-featured-body h2 { margin: 0; font-size: 1.5rem; }
+      .learn-featured-body p { color: var(--text-secondary); font-size: .95rem; line-height: 1.6; }
+      .learn-featured-meta {
+        display: flex; gap: 1.25rem; font-size: .8rem;
+        color: var(--text-tertiary); flex-wrap: wrap;
+      }
+      .learn-featured-meta span { display: flex; align-items: center; gap: .35rem; }
+
+      @media (max-width: 768px) {
+        .learn-featured { grid-template-columns: 1fr; }
+        .learn-featured-visual { min-height: 180px; padding: 2rem; }
+        .learn-featured-body { padding: 1.5rem; }
+      }
+
+      /* What's inside pills */
+      .learn-topics { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+      .learn-topic {
+        padding: .5rem 1rem; border-radius: var(--radius-full);
+        border: 1px solid var(--border-color-strong);
+        font-size: .8rem; font-weight: 500; color: var(--text-secondary);
+        display: flex; align-items: center; gap: .4rem;
+      }
+    </style>
   </head>
 
   <body data-page="learn" data-assets-root=".">
@@ -51,93 +97,87 @@
               <h1>Learn with me</h1>
             </div>
             <p>
-              Theory matters too. Here I break down core concepts in AI, data, automation,
-              and computer science — explained in plain language with real-world context so
-              you can build on solid foundations.
+              Curated resources, prompts, and guides to help you get more
+              out of AI — no fluff, just things you can use today.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- Topic Cards -->
+      <!-- Featured resource — big visual card -->
       <section class="section section--compact-top">
         <div class="container">
-          <div class="learn-grid">
-
-            <div class="learn-card">
-              <div class="learn-card-icon">🤖</div>
-              <h3>Artificial Intelligence</h3>
-              <p>
-                From machine learning basics to LLMs and prompt design — understand
-                how modern AI systems work and when to use them.
-              </p>
-              <span class="learn-card-status">Coming soon</span>
+          <a href="prompts.html" style="text-decoration: none; color: inherit; display: block;">
+            <div class="learn-featured">
+              <div class="learn-featured-visual">
+                <div class="learn-featured-visual-inner">
+                  <span class="big-icon">⚡</span>
+                  <span class="stat">12</span>
+                  <span class="stat-label">ready-to-use prompts</span>
+                </div>
+              </div>
+              <div class="learn-featured-body">
+                <span class="badge">Most popular</span>
+                <h2>Useful Prompts Library</h2>
+                <p>
+                  Copy-paste prompts organized by what you're trying to do —
+                  write better, think clearer, code faster, or learn anything new.
+                  Filter by category and copy in one click.
+                </p>
+                <div class="learn-featured-meta">
+                  <span>✍️ Writing</span>
+                  <span>🧠 Thinking</span>
+                  <span>📋 Productivity</span>
+                  <span>💻 Coding</span>
+                  <span>📚 Learning</span>
+                </div>
+              </div>
             </div>
+          </a>
+        </div>
+      </section>
 
-            <div class="learn-card">
-              <div class="learn-card-icon">🗄️</div>
-              <h3>Data Engineering</h3>
-              <p>
-                Pipelines, lakes, warehouses, and transformations. Learn how raw data
-                becomes decision-ready information.
-              </p>
-              <span class="learn-card-status">Coming soon</span>
+      <!-- RAG featured card -->
+      <section class="section section--compact-top">
+        <div class="container">
+          <a href="learn/rag.html" style="text-decoration: none; color: inherit; display: block;">
+            <div class="learn-featured">
+              <div class="learn-featured-visual" style="background: linear-gradient(135deg, #6366f1, #2563eb);">
+                <div class="learn-featured-visual-inner">
+                  <span class="big-icon">🔍</span>
+                  <span class="stat">RAG</span>
+                  <span class="stat-label">explained simply</span>
+                </div>
+              </div>
+              <div class="learn-featured-body">
+                <span class="badge">New · AI Concepts</span>
+                <h2>What is RAG?</h2>
+                <p>
+                  Retrieval-Augmented Generation explained from scratch — how it works,
+                  why it matters, and when to use it. Includes a visual walkthrough
+                  and an interactive quiz to test your understanding.
+                </p>
+                <div class="learn-featured-meta">
+                  <span>📖 Analogy-based</span>
+                  <span>🔄 Visual flow</span>
+                  <span>🧪 Quiz included</span>
+                </div>
+              </div>
             </div>
-
-            <div class="learn-card">
-              <div class="learn-card-icon">⚙️</div>
-              <h3>Automation</h3>
-              <p>
-                Workflow automation with Make, Zapier, APIs, and scripts. Eliminate
-                repetitive work and connect your tools.
-              </p>
-              <span class="learn-card-status">Coming soon</span>
-            </div>
-
-            <div class="learn-card">
-              <div class="learn-card-icon">🧩</div>
-              <h3>No-Code &amp; Low-Code</h3>
-              <p>
-                Build apps, dashboards, and internal tools without writing code — or
-                with just a little. Great for fast prototyping.
-              </p>
-              <span class="learn-card-status">Coming soon</span>
-            </div>
-
-            <div class="learn-card">
-              <div class="learn-card-icon">💻</div>
-              <h3>Computer Science Essentials</h3>
-              <p>
-                Algorithms, data structures, networking, and system design — the
-                fundamentals that underpin everything else.
-              </p>
-              <span class="learn-card-status">Coming soon</span>
-            </div>
-
-            <div class="learn-card">
-              <div class="learn-card-icon">📊</div>
-              <h3>Analytics &amp; Visualization</h3>
-              <p>
-                Turn numbers into narratives. Explore techniques for storytelling
-                with data using Python, SQL, and BI tools.
-              </p>
-              <span class="learn-card-status">Coming soon</span>
-            </div>
-
-          </div>
+          </a>
         </div>
       </section>
 
       <!-- CTA -->
       <section class="section">
         <div class="container" style="text-align: center; max-width: 640px;">
-          <h2>This section is growing</h2>
-          <p>
-            I'm building out the learning content step by step. In the meantime,
-            check out my experiments to see these concepts in action.
+          <h2>More topics coming soon</h2>
+          <p style="color: var(--text-secondary);">
+            This page will grow with guides, cheatsheets, and deep-dives.
+            Have a concept you'd like explained? Let me know.
           </p>
           <div class="hero-cta" style="justify-content: center; margin-top: 1.5rem;">
-            <a class="btn btn-primary" href="blog.html">Browse experiments</a>
+            <a class="btn btn-primary" href="prompts.html">Browse the prompt library</a>
             <a class="btn btn-secondary" href="contact.html">Suggest a topic</a>
           </div>
         </div>

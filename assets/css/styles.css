@@ -957,8 +957,12 @@ textarea { min-height: 140px; resize: vertical; }
   .learn-grid { grid-template-columns: 1fr; gap: 1rem; }
 
   .footer { padding: 1.5rem 0 1rem; }
-  .footer-content { flex-direction: column; gap: 1.5rem; }
-  .footer-bottom { margin-top: 1.25rem; }
+  .footer-content { flex-direction: column; gap: 1rem; }
+  .footer-col { font-size: .85rem; }
+  .footer-col p { margin: .25rem 0 0; }
+  .footer-nav { gap: .35rem; margin-top: .5rem; }
+  .footer-nav a { font-size: .85rem; }
+  .footer-bottom { margin-top: 1rem; padding-top: .85rem; font-size: .78rem; }
 
   .about-hero-content { padding-top: 2rem; gap: 1.5rem; }
   .about-hero-visual { gap: 1.25rem; padding-top: 0.5rem; }
